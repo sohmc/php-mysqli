@@ -12,5 +12,5 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile --tag php-mysqli:7.4-apache
+        docker build . --file Dockerfile --tag sohmc/php-mysqli:7.4-apache
         docker push sohmc/php-mysqli:7.4-apache
