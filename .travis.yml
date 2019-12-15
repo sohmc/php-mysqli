@@ -1,9 +1,18 @@
 language: bash
 services: docker
 
+env:
+  - TAG=7
+  - TAG=latest
+  - TAG=7.4.0-apache
+  - TAG=7.4-apache
+  - TAG=7-apache
+  - TAG=apache
+
 before_script:
   - echo "${docker_hub_access_token}" | docker login --username sohmc --password-stdin
+  - sed "s/{{TAG}}/$TAG/" ./Dockerfile_Template > ./Dockerfile
 
 script:
-  - docker build . --file ./Dockerfile --tag sohmc/php-mysqli:7.4-apache
-  - docker push sohmc/php-mysqli:7.4-apache
+  - docker build . --file ./Dockerfile --tag sohmc/php-mysqli:$TAG
+  - docker push sohmc/php-mysqli:$TAG
