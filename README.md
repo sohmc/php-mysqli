@@ -31,7 +31,10 @@ php-mysqli:7.4-buster
 The tags will continue to be the same as the official repository,
 indicating the version number and varient.
 
-At current, only 7.4 tags are supported.
+At current, only 7.4 tags on `amd64` architecture is supported.  This is
+primarily due to the [architecture limitations of Travis
+CI](https://docs.travis-ci.com/user/multi-cpu-architectures) and not
+wanting to tax their server unnecessarily.
 
 ## License
 
