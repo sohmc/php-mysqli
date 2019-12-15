@@ -2,7 +2,7 @@ language: bash
 services: docker
 
 before_script:
-  - docker login --username sohmc -p ${docker_hub_access_token}
+  - echo "${docker_hub_access_token}" | docker login --username sohmc --password-stdin
 
 script:
   - docker build . --file ./Dockerfile --tag sohmc/php-mysqli:7.4-apache
