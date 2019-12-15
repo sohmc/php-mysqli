@@ -1,0 +1,9 @@
+language: bash
+services: docker
+
+before_script:
+  - docker login --username sohmc -p ${docker_hub_access_token}
+
+script:
+  - docker build . --file ./Dockerfile --tag sohmc/php-mysqli:7.4-apache
+  - docker push sohmc/php-mysqli:7.4-apache
