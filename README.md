@@ -1,5 +1,8 @@
 # php with mysqli
 
+[![Build
+Status](https://travis-ci.org/sohmc/php-mysqli.svg?branch=master)](https://travis-ci.org/sohmc/php-mysqli)
+
 This Dockerfile is based on [Docker Hub's official php
 image](https://hub.docker.com/_/php).  The goal of this project is
 simple: [Install the mysqli
@@ -27,6 +30,8 @@ php-mysqli:7.4-buster
 
 The tags will continue to be the same as the official repository,
 indicating the version number and varient.
+
+At current, only 7.4 tags are supported.
 
 ## License
 
