@@ -1,7 +1,7 @@
 # php with mysqli
 
 [![Build
-Status](https://travis-ci.org/sohmc/php-mysqli.svg?branch=master)](https://travis-ci.org/sohmc/php-mysqli)
+Status](https://travis-ci.com/sohmc/php-mysqli.svg?branch=master)](https://travis-ci.com/sohmc/php-mysqli)
 
 This Dockerfile is based on [Docker Hub's official php
 image](https://hub.docker.com/_/php).  The goal of this project is
