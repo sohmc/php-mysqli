@@ -3,7 +3,7 @@
 [![Build
 Status](https://travis-ci.com/sohmc/php-mysqli.svg?branch=master)](https://travis-ci.com/sohmc/php-mysqli)
 [![Docker 
-Pulls](https://img.shields.io/docker/pulls/sohmc/php-mysqli)(https://hub.docker.com/sohmc/php-mysqli)
+Pulls](https://img.shields.io/docker/pulls/sohmc/php-mysqli)](https://hub.docker.com/sohmc/php-mysqli)
 
 This Dockerfile is based on [Docker Hub's official php
 image](https://hub.docker.com/_/php).  The goal of this project is
