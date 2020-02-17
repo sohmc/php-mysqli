@@ -77,8 +77,8 @@ env:
 
 before_script:
   - echo "${docker_hub_access_token}" | docker login --username sohmc --password-stdin
-  - sed "s/{{TAG}}/$TAG/" ./Dockerfile_Template > ./Dockerfile
+  - sed "s/{{TAG}}/$TAG/" ./.travis-ci/Dockerfile_Template > ./.travis-ci/Dockerfile
 
 script:
-  - docker build . --file ./Dockerfile --tag sohmc/php-mysqli:$TAG
+  - docker build . --file ./.travis-ci/Dockerfile --tag sohmc/php-mysqli:$TAG
   - docker push sohmc/php-mysqli:$TAG
