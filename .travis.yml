@@ -2,78 +2,118 @@ language: bash
 services: docker
 
 env:
-  - TAG=7.4.0-cli-buster
-  - TAG=7.4-cli-buster
-  - TAG=7-cli-buster
+  # Named versions: These tags will always pull the latest MAJOR version
+  # of php
   - TAG=cli-buster
-  - TAG=7.4.0-buster
-  - TAG=7.4-buster
-  - TAG=7-buster
   - TAG=buster
-  - TAG=7.4.0-cli
-  - TAG=7.4-cli
-  - TAG=7-cli
   - TAG=cli
-  - TAG=7.4.0
-  - TAG=7.4
-  - TAG=7
   - TAG=latest
-  - TAG=7.4.0-apache-buster
-  - TAG=7.4-apache-buster
-  - TAG=7-apache-buster
   - TAG=apache-buster
-  - TAG=7.4.0-apache
-  - TAG=7.4-apache
-  - TAG=7-apache
-  - TAG=apache
-  - TAG=7.4.0-fpm-buster
-  - TAG=7.4-fpm-buster
-  - TAG=7-fpm-buster
-  - TAG=fpm-buster
-  - TAG=7.4.0-fpm
-  - TAG=7.4-fpm
-  - TAG=7-fpm
-  - TAG=fpm
-  - TAG=7.4.0-zts-buster
-  - TAG=7.4-zts-buster
-  - TAG=7-zts-buster
-  - TAG=zts-buster
-  - TAG=7.4.0-zts
-  - TAG=7.4-zts
-  - TAG=7-zts
-  - TAG=zts
-  - TAG=7.4.0-cli-alpine3.10
-  - TAG=7.4-cli-alpine3.10
-  - TAG=7-cli-alpine3.10
-  - TAG=cli-alpine3.10
-  - TAG=7.4.0-alpine3.10
-  - TAG=7.4-alpine3.10
-  - TAG=7-alpine3.10
-  - TAG=alpine3.10
-  - TAG=7.4.0-cli-alpine
-  - TAG=7.4-cli-alpine
-  - TAG=7-cli-alpine
-  - TAG=cli-alpine
-  - TAG=7.4.0-alpine
-  - TAG=7.4-alpine
-  - TAG=7-alpine
   - TAG=alpine
-  - TAG=7.4.0-fpm-alpine3.10
-  - TAG=7.4-fpm-alpine3.10
-  - TAG=7-fpm-alpine3.10
-  - TAG=fpm-alpine3.10
-  - TAG=7.4.0-fpm-alpine
-  - TAG=7.4-fpm-alpine
-  - TAG=7-fpm-alpine
+  - TAG=alpine3.12
+  - TAG=apache
+  - TAG=cli-alpine
+  - TAG=cli-alpine3.12
+  - TAG=fpm
   - TAG=fpm-alpine
-  - TAG=7.4.0-zts-alpine3.10
-  - TAG=7.4-zts-alpine3.10
-  - TAG=7-zts-alpine3.10
-  - TAG=zts-alpine3.10
-  - TAG=7.4.0-zts-alpine
-  - TAG=7.4-zts-alpine
+  - TAG=fpm-alpine3.12
+  - TAG=fpm-buster
+  - TAG=zts
+  - TAG=zts-buster
+
+  # Latest 8 Minor Version
+  - TAG=8
+  - TAG=8-alpine
+  - TAG=8-alpine3.12
+  - TAG=8-apache
+  - TAG=8-apache-buster
+  - TAG=8-buster
+  - TAG=8-cli
+  - TAG=8-cli-alpine
+  - TAG=8-cli-alpine3.12
+  - TAG=8-cli-buster
+  - TAG=8-fpm
+  - TAG=8-fpm-alpine
+  - TAG=8-fpm-alpine3.12
+  - TAG=8-fpm-buster
+  - TAG=8-zts
+  - TAG=8-zts-
+
+  # Latest 8.0 Patch Version
+  - TAG=8.0
+  - TAG=8.0-alpine
+  - TAG=8.0-alpine3.12
+  - TAG=8.0-apache
+  - TAG=8.0-apache-buster
+  - TAG=8.0-buster
+  - TAG=8.0-cli
+  - TAG=8.0-cli-alpine
+  - TAG=8.0-cli-alpine3.12
+  - TAG=8.0-cli-buster
+  - TAG=8.0-fpm
+  - TAG=8.0-fpm-alpine
+  - TAG=8.0-fpm-alpine3.12
+  - TAG=8.0-fpm-buster
+  - TAG=8.0-zts
+  - TAG=8.0-zts-buster
+
+  # Version 8.0.0
+  - TAG=8.0.0
+  - TAG=8.0.0-alpine
+  - TAG=8.0.0-alpine3.12
+  - TAG=8.0.0-apache
+  - TAG=8.0.0-apache-buster
+  - TAG=8.0.0-buster
+  - TAG=8.0.0-cli
+  - TAG=8.0.0-cli-alpine
+  - TAG=8.0.0-cli-alpine3.12
+  - TAG=8.0.0-cli-buster
+  - TAG=8.0.0-fpm
+  - TAG=8.0.0-fpm-alpine
+  - TAG=8.0.0-fpm-alpine3.12
+  - TAG=8.0.0-fpm-buster
+  - TAG=8.0.0-zts
+  - TAG=8.0.0-zts-buster
+
+  # Latest 7 Minor Version
+  - TAG=7
+  - TAG=7-alpine
+  - TAG=7-alpine3.10
+  - TAG=7-apache
+  - TAG=7-apache-buster
+  - TAG=7-buster
+  - TAG=7-cli
+  - TAG=7-cli-alpine
+  - TAG=7-cli-alpine3.10
+  - TAG=7-cli-buster
+  - TAG=7-fpm
+  - TAG=7-fpm-alpine
+  - TAG=7-fpm-alpine3.10
+  - TAG=7-fpm-buster
+  - TAG=7-zts
   - TAG=7-zts-alpine
-  - TAG=zts-alpine
+  - TAG=7-zts-alpine3.10
+  - TAG=7-zts-buster
+
+  # Latest 7.4 Patch Version
+  - TAG=7.4
+  - TAG=7.4-alpine
+  - TAG=7.4-alpine3.10
+  - TAG=7.4-apache
+  - TAG=7.4-apache-buster
+  - TAG=7.4-buster
+  - TAG=7.4-cli
+  - TAG=7.4-cli-alpine
+  - TAG=7.4-cli-alpine3.10
+  - TAG=7.4-cli-buster
+  - TAG=7.4-fpm
+  - TAG=7.4-fpm-alpine
+  - TAG=7.4-fpm-alpine3.10
+  - TAG=7.4-fpm-buster
+  - TAG=7.4-zts
+  - TAG=7.4-zts-alpine
+  - TAG=7.4-zts-alpine3.10
+  - TAG=7.4-zts-buster
 
 before_script:
   - echo "${docker_hub_access_token}" | docker login --username sohmc --password-stdin
