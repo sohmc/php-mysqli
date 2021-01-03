@@ -13,15 +13,26 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tags: [alpine, apache, buster, cli]
+        # tags: [alpine, alpine3.12, apache, apache-buster, buster, cli, cli-alpine, cli-alpine3.12, cli-buster, fpm, fpm-alpine, fpm-alpine3.12, fpm-buster, latest, zts, zts-buster]
 
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
 
-      - name: Build the Docker image
-        uses: docker/build-push-action@v2
+      - name: Build Dockerfile
         with:
-          username: sohmc
-          password: ${{ secrets.DOCKER_TOKEN }}
-          repository: sohmc/php-mysqli
-          tag_with_ref: true
+            TAG: ${{ matrix.tag }}
+        run: echo "++++ Building ${TAG} ++++"
+        run: sed "s/{{TAG}}/$TAG/" ./.travis-ci/Dockerfile_Template > ./.travis-ci/Dockerfile
+
+      - name: Build the Docker image
+        run: cat ./.travis-ci/Dockerfile
+        #uses: docker/build-push-action@v2
+        #with:
+        #  username: sohmc
+        #  password: ${{ secrets.DOCKER_TOKEN }}
+        #  repository: sohmc/php-mysqli
+        #  tag_with_ref: true
