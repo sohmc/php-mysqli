@@ -1,12 +1,10 @@
 name: Docker Image CI
 
 on: 
-  push:
-    branches:
-      - github-workflows
+  pull_request:
+    types: [opened, synchronize, reopened]
   release:
-    types: 
-      - published
+    types: published
   schedule:
     # 4am every Saturday
     - cron: '0 4 * * 6'
