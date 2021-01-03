@@ -15,8 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        VERSION: [base, 8]
-        VARIENT: [alpine, alpine3.12, apache]
+        versions: [base, 8]
+        varients: [alpine, apache]
         #VERSION: [base, 8, 8.0, 8.0.0, 7, 7.4]
         #VARIENT: [alpine, alpine3.12, apache, apache-buster, buster, cli, cli-alpine, cli-alpine3.12, cli-buster, fpm, fpm-alpine, fpm-alpine3.12, fpm-buster, latest, zts, zts-buster]
 
@@ -35,7 +35,8 @@ jobs:
           echo "++++ Building ${TAG} ++++"
           sed "s/{{TAG}}/$TAG/" ./.travis-ci/Dockerfile_Template > ./.travis-ci/Dockerfile
         env:
-          TAG: ${{ matrix.tag }}
+          VERSION: ${{ matrix.versions }}
+          VARIENT: ${{ matrix.varients }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
