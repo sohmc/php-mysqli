@@ -3,6 +3,8 @@ name: Docker Image CI
 on: 
   pull_request:
     types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
   release:
     types: published
   schedule:
