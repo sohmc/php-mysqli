@@ -28,13 +28,21 @@ jobs:
           sed "s/{{TAG}}/$TAG/" ./.travis-ci/Dockerfile_Template > ./.travis-ci/Dockerfile
         env:
           TAG: ${{ matrix.tag }}
-          TESTTAG: sohmc/php-mysqli:${{ matrix.tag }}
+
+      - name: Login to Dockerhub
+        uses: docker/login-action@v1
+        with:
+          username: sohmc
+          password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build the Docker image
+        id: docker_build
         uses: docker/build-push-action@v2
         with:
+          push: true
           context: ./.travis-ci
           file: ./.travis-ci/Dockerfile
           tags: sohmc/php-mysqli:${{ matrix.tag }}
-          username: sohmc
-          password: ${{ secrets.DOCKER_TOKEN }}
+
+      - name: Image Digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
