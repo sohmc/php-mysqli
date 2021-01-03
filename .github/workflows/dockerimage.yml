@@ -1,6 +1,12 @@
 name: Docker Image CI
 
-on: [push]
+on: 
+  push:
+    branches:
+      - github-workflows
+  release:
+    types: 
+      - published
 
 jobs:
 
@@ -9,8 +15,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Build the Docker image
-      run: |
-        docker build . --file Dockerfile --tag sohmc/php-mysqli:7.4-apache
-        docker push sohmc/php-mysqli:7.4-apache
+      - name: Check out the repo
+        uses: actions/checkout@v2
+
+      - name: Build the Docker image
+        uses: docker/build-push-action@v2
+        with:
+          username: sohmc
+          password: ${{ secrets.DOCKER_TOKEN }}
+          repository: sohmc/php-mysqli
+          tag_with_ref: true
