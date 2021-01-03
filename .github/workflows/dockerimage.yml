@@ -23,10 +23,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build Dockerfile
-        with:
-            TAG: ${{ matrix.tag }}
         run: echo "++++ Building ${TAG} ++++"
         run: sed "s/{{TAG}}/$TAG/" ./.travis-ci/Dockerfile_Template > ./.travis-ci/Dockerfile
+        env:
+            TAG: ${{ matrix.tag }}
 
       - name: Build the Docker image
         run: cat ./.travis-ci/Dockerfile
