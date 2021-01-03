@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [base, 8, 8.0, 8.0.0, 7, 7.4]
+        version: [base]
         varient: [alpine, alpine3.12, apache, apache-buster, buster, cli, cli-alpine, cli-alpine3.12, cli-buster, fpm, fpm-alpine, fpm-alpine3.12, fpm-buster, latest, zts, zts-buster]
 
     steps:
