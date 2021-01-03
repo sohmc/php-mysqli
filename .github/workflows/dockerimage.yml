@@ -10,12 +10,13 @@ on:
 
 jobs:
 
-  php-latest:
+  build:
+
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        versions: [base]
-        varients: [alpine, alpine3.12, apache, apache-buster, buster, cli, cli-alpine, cli-alpine3.12, cli-buster, fpm, fpm-alpine, fpm-alpine3.12, fpm-buster, latest, zts, zts-buster]
+        version: [base, 8, 8.0, 8.0.0, 7, 7.4]
+        varient: [alpine, alpine3.12, apache, apache-buster, buster, cli, cli-alpine, cli-alpine3.12, cli-buster, fpm, fpm-alpine, fpm-alpine3.12, fpm-buster, latest, zts, zts-buster]
 
     steps:
       - name: Check out the repo
@@ -57,4 +58,4 @@ jobs:
           tags: sohmc/php-mysqli:${{ steps.build_dockerfile.outputs.tag }}
 
       - name: Image Digest
-        run: echo ${{ steps.docker_image_build.outputs.digest }}
+        run: echo ${{ steps.docker_image_build.outputs.tag }}
