@@ -7,6 +7,9 @@ on:
   release:
     types: 
       - published
+  schedule:
+    # 4am every Saturday
+    - cron: '0 4 * * 6'
 
 jobs:
 
@@ -32,7 +35,7 @@ jobs:
           fi
           echo "::set-output name=tag::${TAG}"
           echo "++++ Building ${TAG} ++++"
-          sed "s/{{TAG}}/$TAG/" ./.travis-ci/Dockerfile_Template > ./.travis-ci/Dockerfile
+          sed "s/{{TAG}}/$TAG/" ./ci/Dockerfile_Template > ./ci/Dockerfile
         env:
           VERSION: ${{ matrix.versions }}
           VARIENT: ${{ matrix.varients }}
@@ -53,7 +56,7 @@ jobs:
         with:
           push: true
           context: .
-          file: ./.travis-ci/Dockerfile
+          file: ./ci/Dockerfile
           tags: sohmc/php-mysqli:${{ steps.build_dockerfile.outputs.tag }}
 
       - name: Image Digest
@@ -83,7 +86,7 @@ jobs:
           fi
           echo "::set-output name=tag::${TAG}"
           echo "++++ Building ${TAG} ++++"
-          sed "s/{{TAG}}/$TAG/" ./.travis-ci/Dockerfile_Template > ./.travis-ci/Dockerfile
+          sed "s/{{TAG}}/$TAG/" ./ci/Dockerfile_Template > ./ci/Dockerfile
         env:
           VERSION: ${{ matrix.versions }}
           VARIENT: ${{ matrix.varients }}
@@ -103,7 +106,7 @@ jobs:
         with:
           push: true
           context: .
-          file: ./.travis-ci/Dockerfile
+          file: ./ci/Dockerfile
           tags: sohmc/php-mysqli:${{ steps.build_dockerfile.outputs.tag }}
 
       - name: Image Digest
@@ -133,7 +136,7 @@ jobs:
           fi
           echo "::set-output name=tag::${TAG}"
           echo "++++ Building ${TAG} ++++"
-          sed "s/{{TAG}}/$TAG/" ./.travis-ci/Dockerfile_Template > ./.travis-ci/Dockerfile
+          sed "s/{{TAG}}/$TAG/" ./ci/Dockerfile_Template > ./ci/Dockerfile
         env:
           VERSION: ${{ matrix.versions }}
           VARIENT: ${{ matrix.varients }}
@@ -153,7 +156,7 @@ jobs:
         with:
           push: true
           context: .
-          file: ./.travis-ci/Dockerfile
+          file: ./ci/Dockerfile
           tags: sohmc/php-mysqli:${{ steps.build_dockerfile.outputs.tag }}
 
       - name: Image Digest
