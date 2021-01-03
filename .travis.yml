@@ -115,6 +115,10 @@ env:
   - TAG=7.4-zts-alpine3.10
   - TAG=7.4-zts-buster
 
+jobs:
+  exclude:
+    - if: branch = github-workflows
+
 before_script:
   - echo "${docker_hub_access_token}" | docker login --username sohmc --password-stdin
   - sed "s/{{TAG}}/$TAG/" ./.travis-ci/Dockerfile_Template > ./.travis-ci/Dockerfile
