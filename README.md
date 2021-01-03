@@ -2,6 +2,8 @@
 
 [![Build
 Status](https://travis-ci.com/sohmc/php-mysqli.svg?branch=main)](https://travis-ci.com/sohmc/php-mysqli)
+![example branch
+parameter](https://github.com/sohmc/php-mysqli/workflows/Docker%20Image%20CI/badge.svg?branch=github-workflows)
 [![Docker 
 Pulls](https://img.shields.io/docker/pulls/sohmc/php-mysqli)](https://hub.docker.com/r/sohmc/php-mysqli)
 
