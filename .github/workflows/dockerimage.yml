@@ -30,7 +30,9 @@ jobs:
             TAG: ${{ matrix.tag }}
 
       - name: Build the Docker image
-        run: cat ./.travis-ci/Dockerfile
+        run: | 
+          ls -lR ./.travis-ci/Dockerfile
+          cat ./.travis-ci/Dockerfile
         #uses: docker/build-push-action@v2
         #with:
         #  username: sohmc
