@@ -10,11 +10,11 @@ on:
 
 jobs:
 
-  php-latest:
+  php-8:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        versions: [base]
+        versions: [8, 8.0, 8.0.0]
         varients: [alpine, alpine3.12, apache, apache-buster, buster, cli, cli-alpine, cli-alpine3.12, cli-buster, fpm, fpm-alpine, fpm-alpine3.12, fpm-buster, latest, zts, zts-buster]
 
     steps:
