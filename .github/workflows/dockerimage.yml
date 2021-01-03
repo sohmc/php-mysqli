@@ -15,16 +15,24 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tag: [alpine, apache, buster, cli]
-        # tags: [alpine, alpine3.12, apache, apache-buster, buster, cli, cli-alpine, cli-alpine3.12, cli-buster, fpm, fpm-alpine, fpm-alpine3.12, fpm-buster, latest, zts, zts-buster]
+        VERSION: [base, 8]
+        VARIENT: [alpine, alpine3.12, apache]
+        #VERSION: [base, 8, 8.0, 8.0.0, 7, 7.4]
+        #VARIENT: [alpine, alpine3.12, apache, apache-buster, buster, cli, cli-alpine, cli-alpine3.12, cli-buster, fpm, fpm-alpine, fpm-alpine3.12, fpm-buster, latest, zts, zts-buster]
 
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
 
       - name: Build Dockerfile
-        run: | 
-          echo "++++ Building ${TESTTAG} ++++"
+        run: |
+          echo "VERSION: ${VERSION} - VARIENT: ${VARIENT}"
+          if [[ $VERSION eq 'base' ]]; then 
+            TAG=$VARIENT
+          else
+            TAG=$VERSION-$VARIENT
+          fi
+          echo "++++ Building ${TAG} ++++"
           sed "s/{{TAG}}/$TAG/" ./.travis-ci/Dockerfile_Template > ./.travis-ci/Dockerfile
         env:
           TAG: ${{ matrix.tag }}
@@ -43,7 +51,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          context: ./.travis-ci
+          context: .
           file: ./.travis-ci/Dockerfile
           tags: sohmc/php-mysqli:${{ matrix.tag }}
 
