@@ -27,7 +27,7 @@ jobs:
       - name: Build Dockerfile
         run: |
           echo "VERSION: ${VERSION} - VARIENT: ${VARIENT}"
-          if [[ $VERSION eq 'base' ]]; then 
+          if [[ "$VERSION" == "base" ]]; then 
             TAG=$VARIENT
           else
             TAG=$VERSION-$VARIENT
