@@ -1,7 +1,7 @@
 # php with mysqli
 
-![Github Workflows 
-Status](https://github.com/sohmc/php-mysqli/workflows/Docker%20Image%20CI/badge.svg?branch=main)
+[![Github Workflows 
+Status](https://github.com/sohmc/php-mysqli/workflows/Docker%20Image%20CI/badge.svg?branch=main)](https://github.com/sohmc/php-mysqli/actions?query=workflow%3A%22Docker+Image+CI%22)
 [![Docker 
 Pulls](https://img.shields.io/docker/pulls/sohmc/php-mysqli)](https://hub.docker.com/r/sohmc/php-mysqli)
 
@@ -33,24 +33,20 @@ php-mysqli:7.4-buster
 The tags will continue to be the same as the official repository,
 indicating the version number and varient.
 
-At current, only 7.4 and 8.0 tags on `amd64` architecture is supported.  
-This is primarily due to the [architecture limitations of Travis
-CI](https://docs.travis-ci.com/user/multi-cpu-architectures).
-
 Additionally, with the release of PHP 8.0, this repository will only
 pull the latest 7.4 images and will no longer pull individual 7.4.x
 patch images.  For complete details, please see "Tag Strategy" below.
 
 ### Tag Strategy
 
-To decrease the load on Travis CI's servers, this repository will always
+To decrease the load on Github's servers, this repository will always
 pull the following images:
 
 - PHP 8 Latest
--- PHP 8.x Latest
--- PHP 8.x.x Latest
+  - PHP 8.x Latest
+  - PHP 8.x.x Latest
 - PHP 7 Latest
--- PHP 7.x Latest
+  - PHP 7.x Latest
 
 This repository will only pull the latest patch version of each minor
 version of PHP 8 only.

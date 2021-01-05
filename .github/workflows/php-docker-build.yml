@@ -5,6 +5,9 @@ on:
     types: [opened, synchronize, reopened]
   push:
     branches: [main]
+      paths-ignore:
+        - 'README.md'
+        - 'LICENSE'
   release:
     types: published
   schedule:
