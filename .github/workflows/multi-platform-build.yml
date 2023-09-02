@@ -22,7 +22,7 @@ jobs:
       matrix:
         versions: [base]
         varients: [alpine]
-        platform: [linux/amd64, linux/armv7, linux/arm64]
+        platform: [linux/amd64, linux/arm/v7, linux/arm64]
 
     steps:
       - name: Check out the repo
@@ -45,6 +45,10 @@ jobs:
           VARIENT: ${{ matrix.varients }}
           PLATFORM: ${{ matrix.platform }}
          
+
+      # Multi-platform building: https://docs.docker.com/build/ci/github-actions/multi-platform/
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
