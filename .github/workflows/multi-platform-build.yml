@@ -19,10 +19,9 @@ jobs:
   php-latest:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
       matrix:
         versions: [base]
-        varients: [alpine, apache, buster]
+        varients: [alpine]
         platform: [linux/amd64, linux/armv7, linux/arm64]
 
     steps:
