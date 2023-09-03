@@ -33,9 +33,9 @@ jobs:
         id: php-variants
         working-directory: ./ci/library/
         run: |
-          OUTPUT=$(cat versions.json \
+          OUTPUT=$(cat versions.json 
             | jq --arg VERSION ${VERSION} \
-            | '[.[$VERSION].variants[] | split("/") | [$VERSION, .[1], .[0]] | join("-")]')
+            '[.[$VERSION].variants[] | split("/") | [$VERSION, .[1], .[0]] | join("-")]')
           echo variants=${VARIANTS} >> "$GITHUB_OUTPUT"  
         env:
           VERSION: ${{ matrix.versions }}
