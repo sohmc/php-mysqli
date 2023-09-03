@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix:
         versions: [base]
-        varients: [alpine]
+        variants: [alpine]
         platform: [linux/amd64, linux/arm64]
 
     steps:
@@ -34,18 +34,18 @@ jobs:
       - name: Build Dockerfile
         id: build_dockerfile
         run: |
-          echo "VERSION: ${VERSION} - VARIENT: ${VARIENT} - PLATFORM: ${PLATFORM}"
+          echo "VERSION: ${VERSION} - VARIANT: ${VARIANT} - PLATFORM: ${PLATFORM}"
           if [[ "$VERSION" == "base" ]]; then 
-            TAG=$VARIENT
+            TAG=$VARIANT
           else
-            TAG=$VERSION-$VARIENT
+            TAG=$VERSION-$VARIANT
           fi
           echo "::set-output name=tag::${TAG}"
           echo "++++ Building ${TAG} ++++"
           sed "s/{{TAG}}/$TAG/" ./ci/Dockerfile_Template > ./ci/Dockerfile
         env:
           VERSION: ${{ matrix.versions }}
-          VARIENT: ${{ matrix.varients }}
+          VARIANT: ${{ matrix.variants }}
           PLATFORM: ${{ matrix.platform }}
 
       # Multi-platform building: https://docs.docker.com/build/ci/github-actions/multi-platform/
