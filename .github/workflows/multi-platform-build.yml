@@ -25,7 +25,7 @@ jobs:
       matrix:
         versions: [base]
         varients: [alpine]
-        platform: [linux/amd64, linux/arm/v7, linux/arm64]
+        platform: [linux/amd64, linux/arm64]
 
     steps:
       - name: Check out the repo
@@ -54,7 +54,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY_IMAGE }}
-          tags: ${{ env.REGISTRY_IMAGE }}:${{ steps.build_dockerfile.outputs.tag }}
+          tags: ${{ steps.build_dockerfile.outputs.tag }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -124,7 +124,7 @@ jobs:
         run: |
           echo ${DOCKER_METADATA_OUTPUT_JSON}
           ls -l
-          jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON" \
+          echo $(jq -cr '.tags | map("-t " + .) | join(" ")') <<< "$DOCKER_METADATA_OUTPUT_JSON" \
             $(printf '${{ env.REGISTRY_IMAGE }}@sha256:%s ' *)  
             
       - name: Create manifest list and push
