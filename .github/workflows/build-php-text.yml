@@ -34,11 +34,11 @@ jobs:
         working-directory: ./ci/library/
         run: |
           OUTPUT=$(cat versions.json 
-            | jq --arg VERSION ${VERSION} \
+            | jq --arg VERSION ${VERSION_IN} \
             '[.[$VERSION].variants[] | split("/") | [$VERSION, .[1], .[0]] | join("-")]')
           echo variants=${VARIANTS} >> "$GITHUB_OUTPUT"  
         env:
-          VERSION: ${{ matrix.versions }}
+          VERSION_IN: ${{ matrix.versions }}
   
   check-matrix:
     name: Check Matrix
