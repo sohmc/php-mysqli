@@ -20,15 +20,18 @@ jobs:
       - name: directory listing
         run: |
           pwd
-          ls -lR
+          ls -lRF
 
       - name: Get latest PHP versions.json
         working-directory: ./ci/library/
-        run: curl -o versions.json "https://raw.githubusercontent.com/docker-library/php/master/versions.json"
+        run: |
+          curl -o versions.json "https://raw.githubusercontent.com/docker-library/php/master/versions.json"
+          pwd
+          ls -lRF
       
       - name: Parse variants
         id: php-variants
-        working-directory: ci/library/
+        working-directory: ./ci/library/
         run: |
           OUTPUT=$(cat versions.json \
             | jq --arg VERSION ${VERSION} \
