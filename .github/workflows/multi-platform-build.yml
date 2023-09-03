@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Multi-Platform Docker Image Build CI
 
 on: 
   pull_request:
@@ -21,6 +21,8 @@ jobs:
 
   php-latest:
     runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.build_dockerfile.outputs.tag }}
     strategy:
       matrix:
         versions: [base]
@@ -40,7 +42,7 @@ jobs:
           else
             TAG=$VERSION-$VARIANT
           fi
-          echo "::set-output name=tag::${TAG}"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
           echo "++++ Building ${TAG} ++++"
           sed "s/{{TAG}}/$TAG/" ./ci/Dockerfile_Template > ./ci/Dockerfile
         env:
