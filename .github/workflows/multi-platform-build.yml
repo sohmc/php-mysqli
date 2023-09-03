@@ -54,6 +54,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY_IMAGE }}
+          tags: ${{ env.REGISTRY_IMAGE }}:${{ steps.build_dockerfile.outputs.tag }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -74,7 +75,6 @@ jobs:
           context: .
           platforms: ${{ matrix.platform }}
           file: ./ci/Dockerfile
-          tags: ${{ env.REGISTRY_IMAGE }}:${{ steps.build_dockerfile.outputs.tag }}
           labels: ${{ steps.meta.outputs.labels }}
           outputs: type=image,name=${{ env.REGISTRY_IMAGE }},push-by-digest=true,name-canonical=true,push=true
 
