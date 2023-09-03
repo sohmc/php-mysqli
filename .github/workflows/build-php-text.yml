@@ -1,28 +1,67 @@
 # https://github.com/docker-library/php/blob/master/.github/workflows/ci.yml
-name: Docker-Library php CI
+name: Docker Image Build for php
 
 on:
   pull_request:
   push:
 
-defaults:
-  run:
-    shell: 'bash -Eeuo pipefail -x {0}'
-
 jobs:
-
-  generate-jobs:
-    name: Generate Jobs
+  create-matrix:
+    name: Create Job Matrix
     runs-on: ubuntu-latest
     outputs:
-      strategy: ${{ steps.generate-jobs.outputs.strategy }}
+      version-variants: ${{ steps.php-variants.outputs.variants }}
+    strategy:
+      matrix:
+        versions: [8.2, 8.1, 8.0]
     steps:
       - uses: actions/checkout@v3
-      - uses: docker-library/bashbrew@HEAD
-      - id: generate-jobs
-        name: Generate Jobs
+      
+      - name: Get latest PHP versions.json
+        working-directory: ci/library/
+        run: curl -o versions.json "https://raw.githubusercontent.com/docker-library/php/master/versions.json"
+      
+      - name: Parse variants
+        id: php-variants
+        working-directory: ci/library/
         run: |
-          strategy="$("$BASHBREW_SCRIPTS/github-actions/generate.sh")"
-          echo "strategy=$strategy" >> "$GITHUB_OUTPUT"
-          jq . <<<"$strategy" # sanity check / debugging aid
+          OUTPUT=$(cat versions.json \
+            | jq [."${VERSION}".variants[] | split("/") \
+            | ["${VERSION}", .[1], .[0]] | join("-")])
+          echo variants=${VARIANTS} >> "$GITHUB_OUTPUT"  
+        env:
+          VERSION=${{ matrix.versions }}
+  
+  check-matrix:
+    name: Check Matrix
+    runs-on: ubuntu-latest
+    needs: create-matrix
+    steps:
+      - name: Check Variable
+        run: echo $VARIANTS
+        env:
+          VARIANTS: ${{ needs.create-matrix.outputs.version-variants }}
+
+
+  create-build-matrix:
+    # Don't run this yet.
+    if: github.repository == 'octocat/octocat'
+    name: Create Build Matrix
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest PHP file
+        working-directory: ci/library/
+        run: curl "https://github.com/docker-library/official-images/raw/master/library/php"
+      
+      - id: generate-matrix
+        name: Generate Jobs
+        working-directory: ci/
+        run: |
+          ./bashbrew-amd64 --library ./library cat php:${VERSION} \
+            | sed '/^Architectures: /!d' \
+            | sed 's/^Architectures: //' \
+            | tr -d '\n' | jq -Rs 'split(", ")'
+        env:
+          VERSION: ${{ matrix.versions }}
+
 
