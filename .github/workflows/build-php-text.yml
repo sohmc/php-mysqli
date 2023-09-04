@@ -58,11 +58,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: php-variants
-          path: /tmp/php-variants/*
+          path: /tmp/php-variants
 
       - name: Join Variants
         id: join-variants
         run: |
+          ls -lF /tmp/php-variants/*
           OUTPUT=$(jq -s '[.[]] | add' /tmp/php-variants/*)
           echo ${OUTPUT}
           echo "variants=${OUTPUT}" >> $GITHUB_OUTPUT
