@@ -65,8 +65,8 @@ jobs:
         run: |
           ls -lF /tmp/php-variants/*
           OUTPUT=$(jq -s '[.[]] | add' /tmp/php-variants/*)
-          echo ${OUTPUT}
-          echo "variants=${OUTPUT}" >> $GITHUB_OUTPUT
+          echo "variants=$OUTPUT" >> $GITHUB_OUTPUT
+          jq . <<<"$OUTPUT" # sanity check
 
   create-build-matrix:
     # Don't run this yet.
