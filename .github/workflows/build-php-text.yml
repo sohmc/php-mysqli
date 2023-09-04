@@ -46,10 +46,13 @@ jobs:
           if-no-files-found: error
           retention-days: 1
   
-  check-matrix:
+  merge-variants:
     name: Check Matrix
     runs-on: ubuntu-latest
+    outputs:
+      variants: ${{ steps.join-variants.outputs.variants }}
     needs: create-matrix
+    
     steps:
       - name: Download digests
         uses: actions/download-artifact@v3
@@ -58,8 +61,11 @@ jobs:
           path: /tmp/php-variants/*
 
       - name: Join Variants
-        run: jq -s . /tmp/php-variants/*
-
+        id: join-variants
+        run: |
+          OUTPUT=$(jq -s '[.[]] | add' /tmp/php-variants/*)
+          echo ${OUTPUT}
+          echo "variants=${OUTPUT}" >> ${GITHUB_OUTPUT}
 
   create-build-matrix:
     # Don't run this yet.
