@@ -1,0 +1,22 @@
+name: Build Image
+description: Some Description
+inputs:
+  variant:
+    description: variant name to use
+    required: true
+outputs:
+  architectures: 
+    description: architectures that the variant supports
+    value: ${{ steps.get-architectures.outputs.architectures }}
+
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      id: get-architectures
+      run: |
+        curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
+        cat VARIANT: ${{ inputs.variant }}
+        ARCHITECTURES=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.[$VARIANT].architectures' php.json)
+        echo "Architectures: ${ARCHITECTURES}"
+        echo "architectures=$ARCHITECTURES" >> $GITHUB_OUTPUT

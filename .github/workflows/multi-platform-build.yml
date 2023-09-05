@@ -47,8 +47,8 @@ jobs:
       - run: |
           ls -lRF
 
-      - name: Call Image Builder
-        uses: ./ci/reusable-workflows/build-image
+      - name: Get Architectures
+        uses: ./.github/workflows/get-arch
         with:
           variant: ${{ matrix.variants }}
 
