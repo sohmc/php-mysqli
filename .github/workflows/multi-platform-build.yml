@@ -44,6 +44,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - run: ls -lRF
+
       - name: Build Image
         uses: ./.github/workflows/build-image.yml
         with:
