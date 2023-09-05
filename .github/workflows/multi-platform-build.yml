@@ -40,6 +40,8 @@ jobs:
       matrix:
         variants: ${{ fromJSON(needs.get-php-variants.outputs.variants) }}
     steps:
+      - uses: actions/checkout@v4
+      
       - name: Build Image
         uses: ./.github/workflows/build-image.yml
         with:
