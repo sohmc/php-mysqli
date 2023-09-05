@@ -45,7 +45,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Get Architectures
-        uses: ./.github/workflows/get-arch
+        uses: ./.github/workflows/test.yml
         with:
           variant: ${{ matrix.variants }}
 
