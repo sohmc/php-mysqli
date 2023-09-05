@@ -21,14 +21,13 @@ jobs:
   get-php-variants:
     runs-on: ubuntu-latest
     outputs:
-      variants: ${{ steps.build_dockerfile.outputs.variants }}
+      variants: ${{ steps.get-variants.outputs.variants }}
 
     steps:
       - name: Get variants
         id: get-variants
         run: |
           curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
-          cat php.json
           VARIANTS=$(jq -cr 'keys | map(select(startswith("8.2") or startswith("8.1") or startswith("8.0")))' php.json)
           echo Variants: ${VARIANTS}
           echo "variants=$VARIANTS" >> $GITHUB_OUTPUT

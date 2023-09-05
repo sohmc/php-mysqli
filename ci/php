@@ -1,180 +1,56 @@
-  - TAG=7.4.0-cli-buster
-  - TAG=7.4-cli-buster
-  - TAG=7-cli-buster
-  - TAG=cli-buster
-  - TAG=7.4.0-buster
-  - TAG=7.4-buster
-  - TAG=7-buster
-  - TAG=buster
-  - TAG=7.4.0-cli
-  - TAG=7.4-cli
-  - TAG=7-cli
-  - TAG=cli
-  - TAG=7.4.0
-  - TAG=7.4
-  - TAG=7
-  - TAG=latest
-  - TAG=7.4.0-apache-buster
-  - TAG=7.4-apache-buster
-  - TAG=7-apache-buster
-  - TAG=apache-buster
-  - TAG=7.4.0-apache
-  - TAG=7.4-apache
-  - TAG=7-apache
-  - TAG=apache
-  - TAG=7.4.0-fpm-buster
-  - TAG=7.4-fpm-buster
-  - TAG=7-fpm-buster
-  - TAG=fpm-buster
-  - TAG=7.4.0-fpm
-  - TAG=7.4-fpm
-  - TAG=7-fpm
-  - TAG=fpm
-  - TAG=7.4.0-zts-buster
-  - TAG=7.4-zts-buster
-  - TAG=7-zts-buster
-  - TAG=zts-buster
-  - TAG=7.4.0-zts
-  - TAG=7.4-zts
-  - TAG=7-zts
-  - TAG=zts
-  - TAG=7.4.0-cli-alpine3.10
-  - TAG=7.4-cli-alpine3.10
-  - TAG=7-cli-alpine3.10
-  - TAG=cli-alpine3.10
-  - TAG=7.4.0-alpine3.10
-  - TAG=7.4-alpine3.10
-  - TAG=7-alpine3.10
-  - TAG=alpine3.10
-  - TAG=7.4.0-cli-alpine
-  - TAG=7.4-cli-alpine
-  - TAG=7-cli-alpine
-  - TAG=cli-alpine
-  - TAG=7.4.0-alpine
-  - TAG=7.4-alpine
-  - TAG=7-alpine
-  - TAG=alpine
-  - TAG=7.4.0-fpm-alpine3.10
-  - TAG=7.4-fpm-alpine3.10
-  - TAG=7-fpm-alpine3.10
-  - TAG=fpm-alpine3.10
-  - TAG=7.4.0-fpm-alpine
-  - TAG=7.4-fpm-alpine
-  - TAG=7-fpm-alpine
-  - TAG=fpm-alpine
-  - TAG=7.4.0-zts-alpine3.10
-  - TAG=7.4-zts-alpine3.10
-  - TAG=7-zts-alpine3.10
-  - TAG=zts-alpine3.10
-  - TAG=7.4.0-zts-alpine
-  - TAG=7.4-zts-alpine
-  - TAG=7-zts-alpine
-  - TAG=zts-alpine
-  - TAG=7.3.12-cli-buster
-  - TAG=7.3-cli-buster
-  - TAG=7.3.12-buster
-  - TAG=7.3-buster
-  - TAG=7.3.12-cli
-  - TAG=7.3-cli
-  - TAG=7.3.12
-  - TAG=7.3
-  - TAG=7.3.12-apache-buster
-  - TAG=7.3-apache-buster
-  - TAG=7.3.12-apache
-  - TAG=7.3-apache
-  - TAG=7.3.12-fpm-buster
-  - TAG=7.3-fpm-buster
-  - TAG=7.3.12-fpm
-  - TAG=7.3-fpm
-  - TAG=7.3.12-zts-buster
-  - TAG=7.3-zts-buster
-  - TAG=7.3.12-zts
-  - TAG=7.3-zts
-  - TAG=7.3.12-cli-stretch
-  - TAG=7.3-cli-stretch
-  - TAG=7.3.12-stretch
-  - TAG=7.3-stretch
-  - TAG=7.3.12-apache-stretch
-  - TAG=7.3-apache-stretch
-  - TAG=7.3.12-fpm-stretch
-  - TAG=7.3-fpm-stretch
-  - TAG=7.3.12-zts-stretch
-  - TAG=7.3-zts-stretch
-  - TAG=7.3.12-cli-alpine3.10
-  - TAG=7.3-cli-alpine3.10
-  - TAG=7.3.12-alpine3.10
-  - TAG=7.3-alpine3.10
-  - TAG=7.3.12-cli-alpine
-  - TAG=7.3-cli-alpine
-  - TAG=7.3.12-alpine
-  - TAG=7.3-alpine
-  - TAG=7.3.12-fpm-alpine3.10
-  - TAG=7.3-fpm-alpine3.10
-  - TAG=7.3.12-fpm-alpine
-  - TAG=7.3-fpm-alpine
-  - TAG=7.3.12-zts-alpine3.10
-  - TAG=7.3-zts-alpine3.10
-  - TAG=7.3.12-zts-alpine
-  - TAG=7.3-zts-alpine
-  - TAG=7.3.12-cli-alpine3.9
-  - TAG=7.3-cli-alpine3.9
-  - TAG=7.3.12-alpine3.9
-  - TAG=7.3-alpine3.9
-  - TAG=7.3.12-fpm-alpine3.9
-  - TAG=7.3-fpm-alpine3.9
-  - TAG=7.3.12-zts-alpine3.9
-  - TAG=7.3-zts-alpine3.9
-  - TAG=7.2.25-cli-buster
-  - TAG=7.2-cli-buster
-  - TAG=7.2.25-buster
-  - TAG=7.2-buster
-  - TAG=7.2.25-cli
-  - TAG=7.2-cli
-  - TAG=7.2.25
-  - TAG=7.2
-  - TAG=7.2.25-apache-buster
-  - TAG=7.2-apache-buster
-  - TAG=7.2.25-apache
-  - TAG=7.2-apache
-  - TAG=7.2.25-fpm-buster
-  - TAG=7.2-fpm-buster
-  - TAG=7.2.25-fpm
-  - TAG=7.2-fpm
-  - TAG=7.2.25-zts-buster
-  - TAG=7.2-zts-buster
-  - TAG=7.2.25-zts
-  - TAG=7.2-zts
-  - TAG=7.2.25-cli-stretch
-  - TAG=7.2-cli-stretch
-  - TAG=7.2.25-stretch
-  - TAG=7.2-stretch
-  - TAG=7.2.25-apache-stretch
-  - TAG=7.2-apache-stretch
-  - TAG=7.2.25-fpm-stretch
-  - TAG=7.2-fpm-stretch
-  - TAG=7.2.25-zts-stretch
-  - TAG=7.2-zts-stretch
-  - TAG=7.2.25-cli-alpine3.10
-  - TAG=7.2-cli-alpine3.10
-  - TAG=7.2.25-alpine3.10
-  - TAG=7.2-alpine3.10
-  - TAG=7.2.25-cli-alpine
-  - TAG=7.2-cli-alpine
-  - TAG=7.2.25-alpine
-  - TAG=7.2-alpine
-  - TAG=7.2.25-fpm-alpine3.10
-  - TAG=7.2-fpm-alpine3.10
-  - TAG=7.2.25-fpm-alpine
-  - TAG=7.2-fpm-alpine
-  - TAG=7.2.25-zts-alpine3.10
-  - TAG=7.2-zts-alpine3.10
-  - TAG=7.2.25-zts-alpine
-  - TAG=7.2-zts-alpine
-  - TAG=7.2.25-cli-alpine3.9
-  - TAG=7.2-cli-alpine3.9
-  - TAG=7.2.25-alpine3.9
-  - TAG=7.2-alpine3.9
-  - TAG=7.2.25-fpm-alpine3.9
-  - TAG=7.2-fpm-alpine3.9
-  - TAG=7.2.25-zts-alpine3.9
-  - TAG=7.2-zts-alpine3.9
+Tags: 8.3.0RC1-cli-bookworm, 8.3-rc-cli-bookworm, 8.3.0RC1-bookworm, 8.3-rc-bookworm, 8.3.0RC1-cli, 8.3-rc-cli, 8.3.0RC1, 8.3-rc
+Tags: 8.3.0RC1-apache-bookworm, 8.3-rc-apache-bookworm, 8.3.0RC1-apache, 8.3-rc-apache
+Tags: 8.3.0RC1-fpm-bookworm, 8.3-rc-fpm-bookworm, 8.3.0RC1-fpm, 8.3-rc-fpm
+Tags: 8.3.0RC1-zts-bookworm, 8.3-rc-zts-bookworm, 8.3.0RC1-zts, 8.3-rc-zts
+Tags: 8.3.0RC1-cli-bullseye, 8.3-rc-cli-bullseye, 8.3.0RC1-bullseye, 8.3-rc-bullseye
+Tags: 8.3.0RC1-apache-bullseye, 8.3-rc-apache-bullseye
+Tags: 8.3.0RC1-fpm-bullseye, 8.3-rc-fpm-bullseye
+Tags: 8.3.0RC1-zts-bullseye, 8.3-rc-zts-bullseye
+Tags: 8.3.0RC1-cli-alpine3.18, 8.3-rc-cli-alpine3.18, 8.3.0RC1-alpine3.18, 8.3-rc-alpine3.18, 8.3.0RC1-cli-alpine, 8.3-rc-cli-alpine, 8.3.0RC1-alpine, 8.3-rc-alpine
+Tags: 8.3.0RC1-fpm-alpine3.18, 8.3-rc-fpm-alpine3.18, 8.3.0RC1-fpm-alpine, 8.3-rc-fpm-alpine
+Tags: 8.3.0RC1-zts-alpine3.18, 8.3-rc-zts-alpine3.18, 8.3.0RC1-zts-alpine, 8.3-rc-zts-alpine
+Tags: 8.3.0RC1-cli-alpine3.17, 8.3-rc-cli-alpine3.17, 8.3.0RC1-alpine3.17, 8.3-rc-alpine3.17
+Tags: 8.3.0RC1-fpm-alpine3.17, 8.3-rc-fpm-alpine3.17
+Tags: 8.3.0RC1-zts-alpine3.17, 8.3-rc-zts-alpine3.17
+8.2.10-cli-bookworm
+8.2.10-apache-bookworm
+8.2.10-fpm-bookworm
+8.2.10-zts-bookworm
+8.2.10-cli-bullseye
+8.2.10-apache-bullseye
+8.2.10-fpm-bullseye
+8.2.10-zts-bullseye
+8.2.10-cli-alpine3.18
+8.2.10-fpm-alpine3.18
+8.2.10-zts-alpine3.18
+8.2.10-cli-alpine3.17
+8.2.10-fpm-alpine3.17
+8.2.10-zts-alpine3.17
+8.1.23-cli-bookworm
+8.1.23-apache-bookworm
+8.1.23-fpm-bookworm
+8.1.23-zts-bookworm
+8.1.23-cli-bullseye
+8.1.23-apache-bullseye
+8.1.23-fpm-bullseye
+8.1.23-zts-bullseye
+8.1.23-cli-alpine3.18
+8.1.23-fpm-alpine3.18
+8.1.23-zts-alpine3.18
+8.1.23-cli-alpine3.17
+8.1.23-fpm-alpine3.17
+8.1.23-zts-alpine3.17
+8.1.23-cli-alpine3.16
+8.1.23-fpm-alpine3.16
+8.1.23-zts-alpine3.16
+8.0.30-cli-bullseye
+8.0.30-apache-bullseye
+8.0.30-fpm-bullseye
+8.0.30-zts-bullseye
+8.0.30-cli-buster
+8.0.30-apache-buster
+8.0.30-fpm-buster
+8.0.30-zts-buster
+8.0.30-cli-alpine3.16
+8.0.30-fpm-alpine3.16
+8.0.30-zts-alpine3.16

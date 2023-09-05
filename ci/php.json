@@ -1,0 +1,1016 @@
+{
+  "sourceUrl": "https://github.com/docker-library/php/blob/cc901e9594f79c305d9508e5b5df572eb93245b4/generate-stackbrew-library.sh",
+  "maintainers": [
+    "Tianon Gravi <admwiggin@gmail.com> (@tianon)",
+    "Joseph Ferguson <yosifkit@gmail.com> (@yosifkit)"
+  ],
+  "gitRepo": "https://github.com/docker-library/php.git",
+  "8.3-rc/bookworm/cli": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.3-rc/bookworm/apache": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.3-rc/bookworm/fpm": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.3-rc/bookworm/zts": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.3-rc/bullseye/cli": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.3-rc/bullseye/apache": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.3-rc/bullseye/fpm": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.3-rc/bullseye/zts": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.3-rc/alpine3.18/cli": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.3-rc/alpine3.18/fpm": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.3-rc/alpine3.18/zts": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.3-rc/alpine3.17/cli": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.3-rc/alpine3.17/fpm": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.3-rc/alpine3.17/zts": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.2/bookworm/cli": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.2/bookworm/apache": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.2/bookworm/fpm": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.2/bookworm/zts": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.2/bullseye/cli": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.2/bullseye/apache": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.2/bullseye/fpm": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.2/bullseye/zts": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.2/alpine3.18/cli": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.2/alpine3.18/fpm": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.2/alpine3.18/zts": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.2/alpine3.17/cli": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.2/alpine3.17/fpm": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.2/alpine3.17/zts": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.1/bookworm/cli": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.1/bookworm/apache": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.1/bookworm/fpm": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.1/bookworm/zts": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.1/bullseye/cli": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.1/bullseye/apache": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.1/bullseye/fpm": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.1/bullseye/zts": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.1/alpine3.18/cli": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.1/alpine3.18/fpm": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.1/alpine3.18/zts": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.1/alpine3.17/cli": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.1/alpine3.17/fpm": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.1/alpine3.17/zts": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.1/alpine3.16/cli": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.1/alpine3.16/fpm": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.1/alpine3.16/zts": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.0/bullseye/cli": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.0/bullseye/apache": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.0/bullseye/fpm": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.0/bullseye/zts": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.0/buster/cli": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.0/buster/apache": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.0/buster/fpm": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.0/buster/zts": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.0/alpine3.16/cli": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.0/alpine3.16/fpm": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  },
+  "8.0/alpine3.16/zts": {
+    "tags": [
+      "8.0.30-zts-alpine3.16",
+      "8.0-zts-alpine3.16",
+      "8.0.30-zts-alpine",
+      "8.0-zts-alpine"
+    ],
+    "architectures": [
+      "amd64",
+      "arm32v6",
+      "arm32v7",
+      "arm64v8",
+      "i386",
+      "ppc64le",
+      "s390x"
+    ],
+    "gitCommit": "41c9ad0b43a50bbf46564f27779a01105df49b9a"
+  }
+}

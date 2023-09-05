@@ -42,10 +42,10 @@ To decrease the load on Github's servers, this repository will always pull the f
   - PHP 8.0.x Latest
   - PHP 8.1.x Latest
   - PHP 8.2.x Latest
-- PHP 7 Latest
-  - PHP 7.x Latest
 
 This repository will only pull the latest patch version of each minor version of PHP 8 only.
+
+Using docker's qemu action, this 
 
 ## License
 
