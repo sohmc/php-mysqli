@@ -16,7 +16,7 @@ runs:
       id: get-architectures
       run: |
         curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
-        cat VARIANT: ${{ inputs.variant }}
+        echo VARIANT: ${{ inputs.variant }}
         ARCHITECTURES=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.[$VARIANT].architectures' php.json)
         echo "Architectures: ${ARCHITECTURES}"
         echo "architectures=$ARCHITECTURES" >> $GITHUB_OUTPUT
