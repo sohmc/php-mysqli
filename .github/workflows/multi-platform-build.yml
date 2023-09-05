@@ -41,6 +41,7 @@ jobs:
         # variants: ${{ fromJSON(needs.get-php-variants.outputs.variants) }}
         variants: [ "8.0/alpine3.16/cli" ]
     uses: ./.github/workflows/get-architectures.yml 
+    secrets: inherit
     with:
       variant: ${{ matrix.variants }}
 
