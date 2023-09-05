@@ -49,7 +49,7 @@ jobs:
           cat ./.github/workflows/build-image.yml
 
       - name: Call Image Builder
-        uses: ./.github/workflows/build-image.yml
+        uses: ./ci/reusable-workflows/build-image
         with:
           variant: ${{ matrix.variants }}
 
