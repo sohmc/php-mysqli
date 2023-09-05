@@ -55,7 +55,7 @@ jobs:
           echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
           echo "++++ Building ${TAG} ++++"
           sed "s/{{TAG}}/$TAG/" ./ci/Dockerfile_Template > ./ci/Dockerfile
-          env:
+        env:
           VARIANT: ${{ matrix.architectures }}
 
       # Multi-platform building: https://docs.docker.com/build/ci/github-actions/multi-platform/
