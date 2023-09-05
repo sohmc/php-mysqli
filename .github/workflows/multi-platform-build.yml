@@ -46,8 +46,8 @@ jobs:
 
       - run: ls -lRF
 
-      - name: Build Image
+      - name: Call Image Builder
         uses: ./.github/workflows/build-image.yml
         with:
-          image: ${{ matrix.variants }}
+          variant: ${{ matrix.variants }}
 
