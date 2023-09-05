@@ -38,7 +38,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        variants: ${{ fromJSON(needs.get-php-variants) }}
+        variants: ${{ fromJSON(needs.get-php-variants.outputs.variants) }}
     steps:
       - name: Build Image
         uses: ./.github/workflows/build-image.yml
