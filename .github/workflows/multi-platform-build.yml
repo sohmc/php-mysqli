@@ -44,7 +44,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: ls -lRF
+      - run: |
+          ls -lRF
+          ls -l ./.github/workflows/build-image.yml
 
       - name: Call Image Builder
         uses: ./.github/workflows/build-image.yml
