@@ -33,9 +33,9 @@ jobs:
       max-parallel: 1
       matrix:
         architectures: ${{ fromJson(needs.get-architectures.outputs.architectures) }}
-      exclude:
-        # Basically only allow amd64 and arm64v8
-        architectures: ["arm32v6","arm32v7","i386","ppc64le","s390x"]
+        exclude:
+          # Basically only allow amd64 and arm64v8
+          - architectures: ["arm32v6","arm32v7","i386","ppc64le","s390x"]
     steps:
       - uses: actions/checkout@v3
 
@@ -45,7 +45,7 @@ jobs:
           VARIANT: ${{ inputs.variant }}
           ARCH: ${{ matrix.architectures }}
     
-      - name: Build Dockerfile for Variant -- ${{ inputs.variant }} - Architecture: ${{ matrix.architectures }}
+      - name: Build Dockerfile for Variant -- ${{ inputs.variant }}
         id: build_dockerfile
         run: |
           curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
@@ -56,7 +56,7 @@ jobs:
           echo "++++ Building ${TAG} ++++"
           sed "s/{{TAG}}/$TAG/" ./ci/Dockerfile_Template > ./ci/Dockerfile
           env:
-          VARIANT: ${{ matrix.variants }}
+          VARIANT: ${{ matrix.architectures }}
 
       # Multi-platform building: https://docs.docker.com/build/ci/github-actions/multi-platform/
       - name: Docker meta
