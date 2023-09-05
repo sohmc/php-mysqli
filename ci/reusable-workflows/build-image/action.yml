@@ -1,34 +1,27 @@
 name: Build Image
-on:
-  workflow_call:
-    inputs:
-      variant:
-        required: true
-        type: string
+description: Some Description
+inputs:
+  variant:
+    description: variant name to use
+    required: true
+outputs:
+  architectures: 
+    description: architectures that the variant supports
+    value: ${{ steps.get-architectures.outputs.architectures }}
 
-defaults:
-  run:
-    shell: bash
 
-jobs:
-  get-architectures:
-    name: Get Supported Architectures for ${{ inputs.variant }}
-    runs-on: ubuntu-latest
-    outputs:
-      architectures: ${{ steps.get-architectures.outputs.architectures }}
-    environment: ${{ inputs.variant }}
 
-    steps:
-      - name: Get php JSON
-        id: get-architectures
-        run: |
-          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
-          cat VARIANT: ${VARIANT}
-          ARCHITECTURES=$(jq -cr --arg VARIANT ${VARIANT} '.[$VARIANT].architectures' php.json)
-          echo "Architectures: ${ARCHITECTURES}"
-          echo "architectures=$ARCHITECTURES" >> $GITHUB_OUTPUT
-        env:
-          VARIANT: ${{ inputs.variant }}
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      id: get-architectures
+      run: |
+        curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
+        cat VARIANT: ${{ inputs.variant }}
+        ARCHITECTURES=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.[$VARIANT].architectures' php.json)
+        echo "Architectures: ${ARCHITECTURES}"
+        echo "architectures=$ARCHITECTURES" >> $GITHUB_OUTPUT
   
   build:
     if: github.ref == 'x'
