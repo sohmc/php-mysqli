@@ -46,7 +46,7 @@ jobs:
 
       - run: |
           ls -lRF
-          ls -l ./.github/workflows/build-image.yml
+          cat ./.github/workflows/build-image.yml
 
       - name: Call Image Builder
         uses: ./.github/workflows/build-image.yml
