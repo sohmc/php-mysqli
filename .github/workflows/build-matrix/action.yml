@@ -1,0 +1,22 @@
+name: Build Image Matrix
+description: Some Description
+inputs:
+  tag:
+    description: Tag of the image to build
+    required: true
+  architectures:
+    description: Targeted Architecture to build on
+    required: yes
+
+runs:
+  using: "composite"
+  strategy:
+    matrix:
+      architectures: ${{ fromJSON(inputs.architectures) }}
+  steps:
+    - shell: bash
+      id: get-architectures
+      run: |
+        echo "Architecture: ${ARCH}"
+      env:
+        ARCH: ${{ matrix.architectures }}

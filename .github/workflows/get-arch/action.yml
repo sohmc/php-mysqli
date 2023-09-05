@@ -1,8 +1,8 @@
-name: Build Image
-description: Some Description
+name: Get Architecture for given Variant
+description: Gets the supported architecture of the given image variant.
 inputs:
   variant:
-    description: variant name to use
+    description: variant to lookup
     required: true
 outputs:
   architectures: 
@@ -20,3 +20,8 @@ runs:
         ARCHITECTURES=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.[$VARIANT].architectures' php.json)
         echo "Architectures: ${ARCHITECTURES}"
         echo "architectures=$ARCHITECTURES" >> $GITHUB_OUTPUT
+
+    - uses: ./.github/workflows/build-matrix
+      with:
+        variant: ${{ inputs.variant }}
+        architectures: ${{ steps.get-architectures.architectures }}
