@@ -1,0 +1,42 @@
+name: Get Architecture for given Variant
+
+on:
+  workflow_call:
+    inputs:
+      variant:
+        type: string
+        required: true
+    outputs:
+      architectures: 
+        description: architectures that the variant supports
+        value: ${{ jobs.get-architectures.outputs.architectures }}
+
+jobs:
+  get-architectures:
+    runs-on: ubuntu-latest
+    outputs:
+      architectures: ${{ steps.get-architectures.outputs.architectures }}
+    steps:
+      - name: Get Architectures for ${{ inputs.variant }}
+        id: get-architectures
+        run: |
+          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
+          echo VARIANT: ${{ inputs.variant }}
+          ARCHITECTURES=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.[$VARIANT].architectures' php.json)
+          echo "Architectures: ${ARCHITECTURES}"
+          echo "architectures=$ARCHITECTURES" >> $GITHUB_OUTPUT
+
+  build-images:
+    runs-on: ubuntu-latest
+    needs: get-architectures
+    strategy:
+      max-parallel: 1
+      matrix:
+        architectures: ${{ fromJson(needs.get-architectures.architectures) }}
+    steps:
+      - run: |
+          echo "variant: ${VARIANT} - arch: ${ARCH}"
+        env:
+          VARIANT: ${{ inputs.variant }}
+          ARCH: ${{ matrix.architectures }}
+      

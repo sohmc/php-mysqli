@@ -33,14 +33,14 @@ jobs:
           echo Variants: ${VARIANTS}
           echo "variants=$VARIANTS" >> $GITHUB_OUTPUT
       
-  build-variant-images:
+  get-variant-architectures:
     # needs: get-php-variants
     strategy:
       max-parallel: 1
       matrix:
         # variants: ${{ fromJSON(needs.get-php-variants.outputs.variants) }}
         variants: [ "8.0/alpine3.16/cli" ]
-    uses: ./.github/workflows/test.yml 
-    # with:
-    #   variant: ${{ matrix.variants }}
+    uses: ./.github/workflows/get-architectures.yml 
+    with:
+      variant: ${{ matrix.variants }}
 
