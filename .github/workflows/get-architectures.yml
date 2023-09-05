@@ -32,7 +32,7 @@ jobs:
     strategy:
       max-parallel: 1
       matrix:
-        architectures: ${{ fromJson(needs.get-architectures.architectures) }}
+        architectures: ${{ fromJson(needs.get-architectures.outputs.architectures) }}
     steps:
       - run: |
           echo "variant: ${VARIANT} - arch: ${ARCH}"
