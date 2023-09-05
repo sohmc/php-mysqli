@@ -30,6 +30,7 @@ jobs:
           curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
           cat php.json
           VARIANTS=$(jq -cr 'keys | map(select(startswith("8.2") or startswith("8.1") or startswith("8.0")))' php.json)
+          echo Variants: ${VARIANTS}
           echo "variants=$VARIANTS" >> $GITHUB_OUTPUT
       
   build-variant-images:
@@ -44,4 +45,4 @@ jobs:
         uses: ./.github/workflows/build-image.yml
         with:
           image: ${{ matrix.variants }}
-          
+
