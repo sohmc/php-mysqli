@@ -53,6 +53,8 @@ jobs:
           PLATFORM=$(jq -cr --arg ARCHITECTURE ${ARCHITECTURE} '.[$ARCHITECTURE]' ./ci/qemu-platform-map.json)
           echo "Platform: ${PLATFORM}"
           echo "platform=${PLATFORM}" >> $GITHUB_OUTPUT
+        env:
+          ARCHITECTURE: ${{ matrix.architectures }}
 
       - run: |
           echo "variant: ${VARIANT} - arch: ${ARCH} (${PLATFORM})"
