@@ -37,17 +37,29 @@ jobs:
         architectures: ${{ fromJson(needs.get-architectures.outputs.architectures) }}
         exclude:
           # Basically only allow amd64 and arm64v8
-          - architectures: ["arm32v6","arm32v7","i386","ppc64le","s390x"]
+          - architectures: arm32v6
+          - architectures: arm32v7
+          - architectures: i386
+          - architectures: ppc64le
+          - architectures: s390x
 
     name: Building Image for ${{ inputs.variant }} - ${{ matrix.architectures }}
     steps:
       - uses: actions/checkout@v3
 
+      - name: Platform mapping
+        id: platform-mapping
+        run: |
+          PLATFORM=$(jq -cr --arg ARCHITECTURE ${ARCHITECTURE} '.[$ARCHITECTURE]' ./ci/qemu-platform-map.json)
+          echo "Platform: ${PLATFORM}"
+          echo "platform=${PLATFORM}" >> $GITHUB_OUTPUT
+
       - run: |
-          echo "variant: ${VARIANT} - arch: ${ARCH}"
+          echo "variant: ${VARIANT} - arch: ${ARCH} (${PLATFORM})"
         env:
           VARIANT: ${{ inputs.variant }}
           ARCH: ${{ matrix.architectures }}
+          PLATFORM: ${{ steps.platform-mapping.outputs.platform }}
     
       - name: Build Dockerfile
         id: build_dockerfile
@@ -95,7 +107,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          platforms: ${{ matrix.architectures }}
+          platforms: ${{ steps.platform-mapping.outputs.platform }}
           file: ./ci/Dockerfile
           labels: ${{ steps.meta.outputs.labels }}
           outputs: type=image,name=${{ github.repository }},push-by-digest=true,name-canonical=true,push=true
