@@ -29,7 +29,7 @@ jobs:
         id: get-variants
         run: |
           curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
-          VARIANTS=$(jq -cr 'keys | map(select(startswith("8.2") or startswith("8.1") or startswith("8.0")))' php.json)
+          VARIANTS=$(jq -cr '.tags[].Directory | select(startswith("8.2") or startswith("8.1") or startswith("8.0"))' php.json)
           echo Variants: ${VARIANTS}
           echo "variants=$VARIANTS" >> $GITHUB_OUTPUT
       
@@ -40,7 +40,7 @@ jobs:
       matrix:
         # variants: ${{ fromJSON(needs.get-php-variants.outputs.variants) }}
         variants: [ "8.0/alpine3.16/cli" ]
-    uses: ./.github/workflows/get-architectures.yml 
+    uses: ./.github/workflows/build-image.yml 
     secrets: inherit
     with:
       variant: ${{ matrix.variants }}
