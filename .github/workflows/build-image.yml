@@ -22,7 +22,7 @@ jobs:
         run: |
           curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
           echo VARIANT: ${{ inputs.variant }}
-          ARCHITECTURES=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.tags[] | select(.Directory == "$VARIANT").Architectures' php.json)
+          ARCHITECTURES=$(jq -cr --arg VARIANT "${{ inputs.variant }}" '.tags[] | select(.Directory == "$VARIANT").Architectures' php.json)
           echo "Architectures: ${ARCHITECTURES}"
           echo "architectures=$ARCHITECTURES" >> $GITHUB_OUTPUT
 
