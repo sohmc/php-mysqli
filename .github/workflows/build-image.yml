@@ -91,10 +91,12 @@ jobs:
           tags: ${{ steps.build_dockerfile.outputs.tag }}
 
       - name: Set up QEMU
+        if: ${{ matrix.architectures }} != 'amd64'
         id: qemu
         uses: docker/setup-qemu-action@v2
       
       - name: Show available architectures via QEMU
+        if: ${{ matrix.architectures }} != 'amd64'
         run: echo ${AVAILABLE}
         env:
           AVAILABLE: ${{ steps.qemu.outputs.platforms }}
@@ -133,7 +135,6 @@ jobs:
           retention-days: 1
 
   merge-images:
-    if: github.ref == 'x'
     runs-on: ubuntu-latest
     needs: build-images
     steps:
