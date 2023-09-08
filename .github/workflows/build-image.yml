@@ -163,16 +163,20 @@ jobs:
       - name: Inspect Docker Metadata
         working-directory: /tmp/digests
         run: |
-          echo ${DOCKER_METADATA_OUTPUT_JSON}
+          echo ${ALL_TAGS}
           ls -l
-          echo $(jq -cr '.tags | map("-t " + .) | join(" ")') <<< "$DOCKER_METADATA_OUTPUT_JSON" \
-            $(printf '${{ github.repository }}@sha256:%s ' *)  
+          echo $(jq -cr '. | map("-t " + .) | join(" ")') <<< "$ALL_TAGS" \
+            $(printf '${{ github.repository }}@sha256:%s ' *)
+        env:
+          ALL_TAGS: ${{ needs.build-images.outputs.tags }}
             
       - name: Create manifest list and push
         working-directory: /tmp/digests
         run: |
-          docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
-            $(printf '${{ github.repository }}@sha256:%s ' *)          
+          docker buildx imagetools create $(jq -cr '. | map("-t " + .) | join(" ")' <<< "$ALL_TAGS") \
+            $(printf '${{ github.repository }}@sha256:%s ' *)   
+        env:
+          ALL_TAGS: ${{ needs.build-images.outputs.tags }}
       
       - name: Inspect image
         run: |
