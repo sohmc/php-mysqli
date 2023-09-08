@@ -72,7 +72,7 @@ jobs:
           curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
           echo VARIANT: ${{ inputs.variant }}
           TAG=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.tags[] | select(.Directory == $VARIANT).Tags[0]' php.json)
-          ALL_TAGS=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.tags[] | select(.Directory == $VARIANT).Tags[]' php.json)
+          ALL_TAGS=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.tags[] | select(.Directory == $VARIANT).Tags' php.json)
           echo "Tag: ${TAG}"
           echo "All Tags: ${ALL_TAGS}"
           echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
@@ -87,7 +87,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: "php-${{ steps.build_dockerfile.outputs.tag }}"
+          images: ${{ github.repository }}
           tags: ${{ steps.build_dockerfile.outputs.tag }}
 
       - name: Set up QEMU
