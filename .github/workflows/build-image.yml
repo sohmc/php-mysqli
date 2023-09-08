@@ -1,4 +1,4 @@
-name: Get Architecture for given Variant
+name: Build Images for a given variant
 
 on:
   workflow_call:
@@ -10,6 +10,9 @@ on:
       architectures: 
         description: architectures that the variant supports
         value: ${{ jobs.get-architectures.outputs.architectures }}
+      tags:
+        description: All tags registered with the variant
+        value: ${{ jobs.build-images.outputs.tags }}
 
 jobs:
   get-architectures:
@@ -45,7 +48,7 @@ jobs:
 
     name: Building Image for ${{ inputs.variant }} - ${{ matrix.architectures }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Platform mapping
         id: platform-mapping
@@ -69,7 +72,7 @@ jobs:
           curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
           echo VARIANT: ${{ inputs.variant }}
           TAG=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.tags[] | select(.Directory == $VARIANT).Tags[0]' php.json)
-          ALL_TAGS=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.tags[] | select(.Directory == $VARIANT).Tags[0]' php.json)
+          ALL_TAGS=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.tags[] | select(.Directory == $VARIANT).Tags[]' php.json)
           echo "Tag: ${TAG}"
           echo "All Tags: ${ALL_TAGS}"
           echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
@@ -77,7 +80,7 @@ jobs:
           echo "++++ Building ${TAG} ++++"
           sed "s/{{TAG}}/$TAG/" ./ci/Dockerfile_Template > ./ci/Dockerfile
         env:
-          VARIANT: ${{ matrix.architectures }}
+          VARIANT: ${{ inputs.variant }}
 
       # Multi-platform building: https://docs.docker.com/build/ci/github-actions/multi-platform/
       - name: Docker meta
@@ -91,7 +94,8 @@ jobs:
         id: qemu
         uses: docker/setup-qemu-action@v2
       
-      - run: echo ${AVAILABLE}
+      - name: Show available architectures via QEMU
+        run: echo ${AVAILABLE}
         env:
           AVAILABLE: ${{ steps.qemu.outputs.platforms }}
 
