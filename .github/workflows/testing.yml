@@ -14,7 +14,7 @@ jobs:
           echo VARIANT: ${VARIANT}
           ALL_TAGS=$(jq -cr --arg VARIANT ${VARIANT} '.tags[] | select(.Directory == $VARIANT).Tags | map("-t " + .) | join(" ")' php.json)
           echo "All Tags: ${ALL_TAGS}"
-          echo "all_tags=$ALL_TAGS >> $GITHUB_OUTPUT"
+          echo "all_tags=$ALL_TAGS" >> $GITHUB_OUTPUT
         env:
           VARIANT: "8.0/alpine3.16/cli"
       
@@ -23,3 +23,11 @@ jobs:
           echo "All Tags: ${ALL_TAGS}"
         env:
           ALL_TAGS: ${{ steps.get_all_tags.outputs.all_tags }}
+
+      - name: Set color
+        id: random-color-generator
+        run: echo "SELECTED_COLOR=green" >> "$GITHUB_OUTPUT"
+      - name: Get color
+        run: echo "The selected color is $SELECTED_COLOR"
+        env:
+          SELECTED_COLOR: ${{ steps.random-color-generator.outputs.SELECTED_COLOR }}

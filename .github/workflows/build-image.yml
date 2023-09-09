@@ -12,7 +12,7 @@ on:
         value: ${{ jobs.get-architectures.outputs.architectures }}
       tags:
         description: All tags registered with the variant
-        value: ${{ jobs.build-images.outputs.tags }}
+        value: ${{ jobs.merge-images.outputs.all_tags }}
 
 jobs:
   get-architectures:
@@ -132,28 +132,14 @@ jobs:
   merge-images:
     runs-on: ubuntu-latest
     needs: build-images
+    outputs:
+      all_tags: ${{ steps.get_all_tags.outputs.all_tags }}
     steps:
       - name: Download digests
         uses: actions/download-artifact@v3
         with:
           name: digests
           path: /tmp/digests
-      
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      
-      # - name: Docker meta
-      #   id: meta
-      #   uses: docker/metadata-action@v4
-      #   with:
-      #     images: ${{ github.repository }}
-      #     tags: ${{ needs.build-images.outputs.tags }}
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: sohmc
-          password: ${{ secrets.DOCKER_TOKEN }}
       
       - name: Get all tags for variant
         id: get_all_tags
@@ -162,7 +148,7 @@ jobs:
           echo VARIANT: ${VARIANT}
           ALL_TAGS=$(jq -cr --arg VARIANT ${VARIANT} '.tags[] | select(.Directory == $VARIANT).Tags | map("-t " + .) | join(" ")' php.json)
           echo "All Tags: ${ALL_TAGS}"
-          echo "all_tags=$ALL_TAGS >> $GITHUB_OUTPUT"
+          echo "all_tags=$ALL_TAGS" >> $GITHUB_OUTPUT
         env:
           VARIANT: ${{ inputs.variant }}          
         
@@ -174,6 +160,22 @@ jobs:
           echo $(printf '${{ github.repository }}@sha256:%s ' *)
         env:
           ALL_TAGS: ${{ steps.get_all_tags.outputs.all_tags }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ github.repository }}
+          tags: ${{ steps.get_all_tags.outputs.all_tags }}
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: sohmc
+          password: ${{ secrets.DOCKER_TOKEN }}
             
       - name: Create manifest list and push
         working-directory: /tmp/digests
@@ -185,7 +187,7 @@ jobs:
       
       - name: Inspect image
         run: |
-          docker buildx imagetools inspect ${{ github.repository }}:${{ steps.meta.outputs.version }}   
+          docker buildx imagetools inspect ${{ github.repository }}: ${{ steps.meta.outputs.version }}   
 
 
 
