@@ -16,6 +16,7 @@ on:
 
 jobs:
   get-architectures:
+    if: ${{ github.sha }} == 'x'
     runs-on: ubuntu-latest
     outputs:
       architectures: ${{ steps.get-architectures.outputs.architectures }}
@@ -136,9 +137,10 @@ jobs:
 
   merge-images:
     runs-on: ubuntu-latest
-    needs: build-images
+    # needs: build-images
     steps:
       - name: Download digests
+        if: ${{ github.sha }} == 'x'
         uses: actions/download-artifact@v3
         with:
           name: digests
