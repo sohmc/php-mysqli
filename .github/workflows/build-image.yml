@@ -16,7 +16,7 @@ on:
 
 jobs:
   get-architectures:
-    if: ${{ github.sha }} == 'x'
+    if: ${{ github.repository }} == 'DEBUGGING'
     runs-on: ubuntu-latest
     outputs:
       architectures: ${{ steps.get-architectures.outputs.architectures }}
@@ -31,6 +31,7 @@ jobs:
           echo "architectures=$ARCHITECTURES" >> $GITHUB_OUTPUT
 
   build-images:
+    if: ${{ github.repository }} == 'DEBUGGING'
     runs-on: ubuntu-latest
     needs: get-architectures
     outputs:
