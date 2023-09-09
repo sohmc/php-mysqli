@@ -178,7 +178,7 @@ jobs:
           ls -l
           echo $(printf '${{ github.repository }}@sha256:%s ' *)
         env:
-          ALL_TAGS: ${{ steps.get_all_tags.outputs.tags }}
+          ALL_TAGS: ${{ steps.get_all_tags.outputs.all_tags }}
             
       - name: Create manifest list and push
         working-directory: /tmp/digests
