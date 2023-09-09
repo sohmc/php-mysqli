@@ -192,7 +192,7 @@ jobs:
       - name: Create manifest list and push
         working-directory: /tmp/digests
         run: |
-          docker buildx imagetools create --dry-run ${ALL_TAGS} \
+          docker buildx imagetools create ${ALL_TAGS} \
             $(printf '${{ github.repository }}@sha256:%s ' *)
         env:
           ALL_TAGS: ${{ steps.get_all_tags.outputs.all_tags }}
