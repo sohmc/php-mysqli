@@ -19,7 +19,6 @@ jobs:
           VARIANT: "8.0/alpine3.16/cli"
       
       - name: Inspect Docker Image Tags
-        working-directory: /tmp/digests
         run: |
           echo "All Tags: ${ALL_TAGS}"
           ls -l
