@@ -46,7 +46,7 @@ jobs:
           - architectures: ppc64le
           - architectures: s390x
 
-    name: Building Image for ${{ inputs.variant }} - ${{ matrix.architectures }}
+    name: ${{ inputs.variant }} - ${{ matrix.architectures }} --- Build Image
     steps:
       - uses: actions/checkout@v4
 
@@ -167,7 +167,7 @@ jobs:
           echo VARIANT: ${{ inputs.variant }}
           ALL_TAGS=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.tags[] | select(.Directory == $VARIANT).Tags | map("-t " + .) | join(" ")' php.json)
           echo "All Tags: ${ALL_TAGS}"
-          echo "all_tags=${ALL_TAGS} >> $GITHUB_OUTPUT"
+          echo "all_tags=$ALL_TAGS >> $GITHUB_OUTPUT"
         env:
           VARIANT: ${{ inputs.variant }}          
         
@@ -186,7 +186,7 @@ jobs:
           docker buildx imagetools create ${ALL_TAGS} \
             $(printf '${{ github.repository }}@sha256:%s ' *)
         env:
-          ALL_TAGS: ${{ steps.get_all_tags.outputs.tags }}
+          ALL_TAGS: ${{ steps.get_all_tags.outputs.all_tags }}
       
       - name: Inspect image
         run: |
