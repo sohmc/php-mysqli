@@ -173,7 +173,13 @@ jobs:
           images: ${{ github.repository }}
           tags: |
             type=raw,priority=1000,value=${{ needs.build-images.outputs.tag }}
-
+      
+      - name: Inspect Docker Meta Output
+        run: |
+          echo DOCKER_METADATA_OUTPUT_JSON: ${DOCKER_METADATA_OUTPUT_JSON}
+          echo Inspecting ${DOCKER_METADATA_OUTPUT_BAKE_FILE}
+          cat $DOCKER_METADATA_OUTPUT_BAKE_FILE
+          
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
@@ -183,7 +189,7 @@ jobs:
       - name: Create manifest list and push
         working-directory: /tmp/digests
         run: |
-          docker buildx imagetools create ${ALL_TAGS} \
+          docker buildx imagetools create --dry-run ${ALL_TAGS} \
             $(printf '${{ github.repository }}@sha256:%s ' *)
         env:
           ALL_TAGS: ${{ steps.get_all_tags.outputs.all_tags }}
