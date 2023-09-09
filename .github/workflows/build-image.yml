@@ -160,23 +160,33 @@ jobs:
           username: sohmc
           password: ${{ secrets.DOCKER_TOKEN }}
       
-      - name: Inspect Docker Metadata
+      - name: Get all tags for variant
+        id: get_all_tags
+        run: |
+          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
+          echo VARIANT: ${{ inputs.variant }}
+          ALL_TAGS=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.tags[] | select(.Directory == $VARIANT).Tags | map("-t " + .) | join(" ")' php.json)
+          echo "All Tags: ${ALL_TAGS}"
+          echo "all_tags=${ALL_TAGS} >> $GITHUB_OUTPUT"
+        env:
+          VARIANT: ${{ inputs.variant }}          
+        
+      - name: Inspect Docker Image Tags
         working-directory: /tmp/digests
         run: |
-          echo ${ALL_TAGS}
+          echo "All Tags: ${ALL_TAGS}"
           ls -l
-          echo $(jq -cr '. | map("-t " + .) | join(" ")') <<< "$ALL_TAGS" \
-            $(printf '${{ github.repository }}@sha256:%s ' *)
+          echo $(printf '${{ github.repository }}@sha256:%s ' *)
         env:
-          ALL_TAGS: ${{ needs.build-images.outputs.tags }}
+          ALL_TAGS: ${{ steps.get_all_tags.outputs.tags }}
             
       - name: Create manifest list and push
         working-directory: /tmp/digests
         run: |
-          docker buildx imagetools create $(jq -cr '. | map("-t " + .) | join(" ")' <<< "$ALL_TAGS") \
-            $(printf '${{ github.repository }}@sha256:%s ' *)   
+          docker buildx imagetools create ${ALL_TAGS} \
+            $(printf '${{ github.repository }}@sha256:%s ' *)
         env:
-          ALL_TAGS: ${{ needs.build-images.outputs.tags }}
+          ALL_TAGS: ${{ steps.get_all_tags.outputs.tags }}
       
       - name: Inspect image
         run: |
