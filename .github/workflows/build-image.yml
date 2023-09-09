@@ -32,8 +32,6 @@ jobs:
   build-images:
     runs-on: ubuntu-latest
     needs: get-architectures
-    outputs:
-      tags: ${{ steps.build_dockerfile.outputs.all_tags }}
     strategy:
       max-parallel: 1
       matrix:
@@ -72,11 +70,8 @@ jobs:
           curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
           echo VARIANT: ${{ inputs.variant }}
           TAG=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.tags[] | select(.Directory == $VARIANT).Tags[0]' php.json)
-          ALL_TAGS=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.tags[] | select(.Directory == $VARIANT).Tags' php.json)
           echo "Tag: ${TAG}"
-          echo "All Tags: ${ALL_TAGS}"
           echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
-          echo "all_tags=${ALL_TAGS} >> $GITHUB_OUTPUT"
           echo "++++ Building ${TAG} ++++"
           sed "s/{{TAG}}/$TAG/" ./ci/Dockerfile_Template > ./ci/Dockerfile
         env:
@@ -164,8 +159,8 @@ jobs:
         id: get_all_tags
         run: |
           curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
-          echo VARIANT: ${{ inputs.variant }}
-          ALL_TAGS=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.tags[] | select(.Directory == $VARIANT).Tags | map("-t " + .) | join(" ")' php.json)
+          echo VARIANT: ${VARIANT}
+          ALL_TAGS=$(jq -cr --arg VARIANT ${VARIANT} '.tags[] | select(.Directory == $VARIANT).Tags | map("-t " + .) | join(" ")' php.json)
           echo "All Tags: ${ALL_TAGS}"
           echo "all_tags=$ALL_TAGS >> $GITHUB_OUTPUT"
         env:
