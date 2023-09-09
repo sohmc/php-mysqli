@@ -151,7 +151,7 @@ jobs:
         run: |
           curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
           echo VARIANT: ${VARIANT}
-          ALL_TAGS=$(jq -cr --arg VARIANT ${VARIANT} '.tags[] | select(.Directory == $VARIANT).Tags | map("-t " + .) | join(" ")' php.json)
+          ALL_TAGS=$(jq -cr --arg VARIANT ${VARIANT} '.tags[] | select(.Directory == $VARIANT).Tags | map("-t sohmc/php-mysqli:" + .) | join(" ")' php.json)
           echo "All Tags: ${ALL_TAGS}"
           echo "all_tags=$ALL_TAGS" >> $GITHUB_OUTPUT
         env:
@@ -199,7 +199,7 @@ jobs:
       
       - name: Inspect image
         run: |
-          docker buildx imagetools inspect ${{ github.repository }}: ${{ steps.meta.outputs.version }}   
+          docker buildx imagetools inspect ${{ github.repository }}
 
 
 
