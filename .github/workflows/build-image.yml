@@ -119,7 +119,6 @@ jobs:
           file: ./ci/Dockerfile
           labels: ${{ steps.meta.outputs.labels }}
           outputs: type=image,name=${{ github.repository }},push-by-digest=true,name-canonical=true,push=true
-          tags: ${{ steps.build_dockerfile.outputs.all_tags_csv }}
   
       - name: Export Digest
         run: |
