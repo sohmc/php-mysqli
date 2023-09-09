@@ -21,7 +21,5 @@ jobs:
       - name: Inspect Docker Image Tags
         run: |
           echo "All Tags: ${ALL_TAGS}"
-          ls -l
-          echo $(printf '${{ github.repository }}@sha256:%s ' *)
         env:
           ALL_TAGS: ${{ steps.get_all_tags.outputs.all_tags }}
