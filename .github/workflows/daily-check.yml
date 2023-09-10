@@ -1,0 +1,68 @@
+name: Check docker/php commit sha
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+      - 'ci/build_sha.txt'
+  schedule:
+    # Run daily at 1:47 AM.
+    - cron: '47 1 * * *'
+
+jobs:
+  get-latest-commit:
+    runs-on: ubuntu-latest
+    outputs:
+      new-commit: ${{ steps.compare-sha.outputs.NEWCOMMIT }}
+      latest-php-sha: ${{ steps.get-latest-sha.outputs.GitCommit }}
+    steps:       
+      - name: Get latest commit SHA
+        id: get-latest-sha
+        run: |
+          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
+          GitCommit=$(jq -cr '.tags[0].GitCommit' php.json)
+          echo GitCommit: ${GitCommit}
+          echo "GitCommit=$GitCommit" >> $GITHUB_OUTPUT
+
+      - name: Compare SHAs
+        id: compare-sha
+        run: |
+          echo Archived SHA: ${ARCHIVEDSHA}
+          echo Latest SHA:   ${LATESTSHA}
+          if [[ $ARCHIVEDSHA == $LATESTSHA ]]; then 
+            NEWCOMMIT=false
+          else
+            NEWCOMMIT=true
+          fi
+
+          echo "NEWCOMMIT=$NEWCOMMIT" >> $GITHUB_OUTPUT
+          echo "NEWCOMMIT=$NEWCOMMIT"
+        env:
+          ARCHIVEDSHA: ${{ vars.PHP_COMMIT_SHA }}
+          LATESTSHA: ${{ steps.get-latest-sha.outputs.result }}
+
+  trigger-build:
+    if: needs.get-latest-commit.outputs.new-commit == 'true' || startsWith(github.event.head_commit.message, 'FORCE_BUILD=TRUE')
+    runs-on: ubuntu-latest
+    needs: get-latest-commit
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update LATEST
+        if: needs.get-latest-commit.outputs.new-commit == 'true'
+        run: |
+          echo "LATEST: ${LATEST_PHP_SHA}" > ./ci/build_sha.txt
+    
+      - name: Update FORCE_BUILD
+        if: startsWith(github.event.head_commit.message, 'FORCE_BUILD=TRUE')
+        run: |
+          echo "FORCE_BUILD: ${LATEST_PHP_SHA}" > ./ci/build_sha.txt
+      
+      - name: Git Add and Commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: './ci/build_sha.txt'
+          author_name: 'daily-check-cron-sohmc-php-mysqli'
+          author_email: '5244e343e13f42aeb23e92f8377c90a7@schedule.github.actions'

@@ -1,18 +1,12 @@
 name: Multi-Platform Docker Image Build CI
 
 on: 
-  pull_request:
-    types: [opened, synchronize, reopened]
   push:
-    branches: [building-in-docker-hub]
+    branches: 
+      - main
     paths-ignore:
     - 'README.md'
     - 'LICENSE'
-  release:
-    types: published
-  schedule:
-    # 4am every Saturday
-    - cron: '0 4 * * 6'
 
 env:
   REGISTRY_IMAGE: ${{ github.repository }}
