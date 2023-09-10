@@ -35,9 +35,9 @@ jobs:
     outputs:
       tag: ${{ steps.build_dockerfile.outputs.tag }}
     strategy:
-      # Fail Fast for debugging
+      # Fail Fast for architecture builds.  If there is an issue building a specific architecture, 
+      # the entire variant build will fail so that it can be retried later.
       fail-fast: true
-      max-parallel: 5
       matrix:
         architectures: ${{ fromJson(needs.get-architectures.outputs.architectures) }}
         exclude:

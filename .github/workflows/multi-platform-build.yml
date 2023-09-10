@@ -35,7 +35,8 @@ jobs:
   get-variant-architectures:
     needs: get-php-variants
     strategy:
-      max-parallel: 1
+      max-parallel: 5
+      fail-fast: false
       matrix:
         variants: ${{ fromJSON(needs.get-php-variants.outputs.variants) }}
         # variants: [ "8.0/alpine3.16/cli" ]
