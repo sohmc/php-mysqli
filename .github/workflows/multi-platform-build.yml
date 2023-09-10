@@ -33,7 +33,7 @@ jobs:
           echo "variants=$VARIANTS" >> $GITHUB_OUTPUT
       
   get-variant-architectures:
-    # needs: get-php-variants
+    needs: get-php-variants
     strategy:
       max-parallel: 1
       matrix:
