@@ -35,16 +35,14 @@ jobs:
     outputs:
       tag: ${{ steps.build_dockerfile.outputs.tag }}
     strategy:
-      max-parallel: 1
+      # Fail Fast for debugging
+      fail-fast: true
+      max-parallel: 5
       matrix:
         architectures: ${{ fromJson(needs.get-architectures.outputs.architectures) }}
         exclude:
-          # Basically only allow amd64 and arm64v8
-          - architectures: arm32v6
-          - architectures: arm32v7
-          - architectures: i386
-          - architectures: ppc64le
-          - architectures: s390x
+          # Architectures that are not supported by QEMU
+          - architectures: arm32v5
 
     name: ${{ inputs.variant }} - ${{ matrix.architectures }} --- Build Image
     steps:
