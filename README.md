@@ -22,9 +22,7 @@ php-mysqli:8.0-buster
 
 The tags will continue to be the same as the official repository, indicating the version number and variant.
 
-[Since php7 has reached end of life on Nov. 28, 2022](https://www.php.net/eol.php), only php 8, 8.1, and 8.2 will be built.  As minor versions are released, I will update this section accordingly.
-
-For complete details, please see "Tag Strategy" below.
+[Since php7 has reached end of life on Nov. 28, 2022](https://www.php.net/eol.php), only php 8, 8.1, and 8.2 will be built.  As minor versions are released, I will update this section accordingly.  If you happen to catch it before I do, please feel free to create an issue.
 
 ### Tag Strategy
 
@@ -35,9 +33,12 @@ To decrease the load on Github's servers, this repository will always pull the f
   - PHP 8.1.x Latest
   - PHP 8.2.x Latest
 
-Using Docker's [qemu action](https://github.com/docker/setup-qemu-action), this repository will attempt to provide images for all supported architectures.
+Previous version images are available in [Docker Hub](https://hub.docker.com/r/sohmc/php-mysqli) by their specific tag name.
+
+Using Docker's [qemu action](https://github.com/docker/setup-qemu-action), this repository will attempt to provide images for all supported architectures.  The only architecture that is known to not be supported is `arm32v5`.
 
 ## License
 
-This repository uses the MIT License.
+The PHP image created by Docker is released via the MIT license.  Likewise, the php-mysqli image created by this repository is also released via the MIT license.
 
+All code written within and maintained within `.github/workflows/` and `ci/` directories are released via AGPL 3.0.

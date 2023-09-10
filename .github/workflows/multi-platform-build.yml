@@ -4,9 +4,8 @@ on:
   push:
     branches: 
       - main
-    paths-ignore:
-    - 'README.md'
-    - 'LICENSE'
+    paths:
+    - 'ci/build_sha.txt'
 
 env:
   REGISTRY_IMAGE: ${{ github.repository }}
