@@ -12,7 +12,7 @@ Since mysqli is still supported, this docker image installs the driver but leave
 
 ## Tagging conventions
 
-This repository will attempt, using Github Actions on a weekly schedule, to keep in line with official releases of the official repository.  As such, containers will append `-mysqli` to the end of the repo name, like so:
+This repository will attempt, using Github Actions on a daily schedule, to keep in line with official releases of the official repository.  As such, containers will append `-mysqli` to the end of the repo name, like so:
 
 ```
 php-mysqli:8.0-apache
