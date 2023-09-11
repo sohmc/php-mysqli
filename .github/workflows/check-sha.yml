@@ -41,7 +41,7 @@ jobs:
           echo "NEWCOMMIT=$NEWCOMMIT"
         env:
           ARCHIVEDSHA: ${{ vars.PHP_COMMIT_SHA }}
-          LATESTSHA: ${{ steps.get-latest-sha.outputs.result }}
+          LATESTSHA: ${{ steps.get-latest-sha.outputs.GitCommit }}
 
   trigger-build:
     if: needs.get-latest-commit.outputs.new-commit == 'true' || startsWith(github.event.head_commit.message, 'FORCE_BUILD=TRUE')
