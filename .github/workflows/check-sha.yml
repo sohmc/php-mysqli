@@ -21,7 +21,7 @@ jobs:
       - name: Get latest commit SHA
         id: get-latest-sha
         run: |
-          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
+          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/latest/download/php
           GitCommit=$(jq -cr '.tags[0].GitCommit' php.json)
           echo GitCommit: ${GitCommit}
           echo "GitCommit=$GitCommit" >> $GITHUB_OUTPUT
