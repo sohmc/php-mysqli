@@ -23,7 +23,7 @@ jobs:
       - name: Get Architectures for ${{ inputs.variant }}
         id: get-architectures
         run: |
-          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
+          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/latest/download/php
           echo VARIANT: ${{ inputs.variant }}
           ARCHITECTURES=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.tags[] | select(.Directory == $VARIANT).Architectures' php.json)
           echo "Architectures: ${ARCHITECTURES}"
@@ -67,7 +67,7 @@ jobs:
       - name: Build Dockerfile
         id: build_dockerfile
         run: |
-          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
+          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/latest/download/php
           echo VARIANT: ${{ inputs.variant }}
           TAG=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.tags[] | select(.Directory == $VARIANT).Tags[0]' php.json)
           ALL_TAGS_CSV=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.tags[] | select(.Directory == $VARIANT).Tags | map("sohmc/php-mysqli:" + .) | join(",")' php.json)
@@ -147,7 +147,7 @@ jobs:
       - name: Get all tags for variant
         id: get_all_tags
         run: |
-          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
+          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/latest/download/php
           echo VARIANT: ${VARIANT}
           ALL_TAGS=$(jq -cr --arg VARIANT ${VARIANT} '.tags[] | select(.Directory == $VARIANT).Tags | map("-t sohmc/php-mysqli:" + .) | join(" ")' php.json)
           echo "All Tags: ${ALL_TAGS}"
