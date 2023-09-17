@@ -20,7 +20,7 @@ jobs:
       - name: Get variants
         id: get-variants
         run: |
-          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/download/latest/php
+          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/latest/download/php
           VARIANTS=$(jq -cr '[.tags[].Directory | select(startswith("8.2") or startswith("8.1") or startswith("8.0"))]' php.json)
           echo Variants: ${VARIANTS}
           echo "variants=$VARIANTS" >> $GITHUB_OUTPUT
