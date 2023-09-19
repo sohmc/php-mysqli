@@ -7,8 +7,12 @@ on:
       - 'README.md'
       - 'LICENSE'
   schedule:
-    # Run daily at 5:47 AM.
     - cron: '47 5 * * *'
+    - cron: '47 7 * * *'
+    - cron: '47 9 * * *'
+
+env:
+  VERSION: ${{ ( github.event.schedule == '47 5 * * *' && '8.2' ) || ( github.event.schedule == '47 7 * * *' && '8.1' ) || ( github.event.schedule == '47 9 * * *' && '8.0' ) ||  'null' }}
 
 jobs:
   get-latest-commit:
@@ -43,18 +47,15 @@ jobs:
           LATESTSHA: ${{ steps.get-latest-sha.outputs.GitCommit }}
 
   trigger-build:
-    if: needs.get-latest-commit.outputs.new-commit == 'true' || startsWith(github.event.head_commit.message, 'FORCE_BUILD=TRUE')
+    if: ( needs.get-latest-commit.outputs.new-commit == 'true' && github.event_name == 'schedule' ) || startsWith(github.event.head_commit.message, 'FORCE_BUILD=TRUE')
     needs: get-latest-commit
     uses: ./.github/workflows/multi-platform-build.yml
-    strategy:
-      fail-fast: false
-      matrix:
-        versions: ['8.0', '8.1', '8.2']
     secrets: inherit
     with:
-      version: ${{ matrix.versions }}
+      version: $VERSION
 
   store-php-sha:
+    if: github.event.schedule == '47 9 * * *'
     runs-on: ubuntu
     needs: [trigger-build, get-latest-commit]
     steps:
