@@ -6,7 +6,6 @@ on:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
-      - 'ci/build_sha.txt'
   schedule:
     # Run daily at 5:47 AM.
     - cron: '47 5 * * *'
@@ -45,30 +44,30 @@ jobs:
 
   trigger-build:
     if: needs.get-latest-commit.outputs.new-commit == 'true' || startsWith(github.event.head_commit.message, 'FORCE_BUILD=TRUE')
-    runs-on: ubuntu-latest
     needs: get-latest-commit
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.TOKEN_FOR_ACTIONS }}
+    uses: ./.github/workflows/multi-platform-build.yml
+    strategy:
+      fail-fast: false
+      matrix:
+        versions: ['8.0', '8.1', '8.2']
+    secrets: inherit
+    with:
+      version: ${{ matrix.versions }}
 
-      - name: Update LATEST
-        if: needs.get-latest-commit.outputs.new-commit == 'true'
+  store-php-sha:
+    runs-on: ubuntu
+    needs: [trigger-build, get-latest-commit]
+    steps:
+      - name: Store SHA in Github Variable
         run: |
-          echo "LATEST: ${LATEST_PHP_SHA}" > ./ci/build_sha.txt
+          echo docker-library/official-images SHA: ${SHA}
+          echo github repository: ${GITHUB_REPOSITORY}
+          gh api --method PATCH \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            /repos/${GITHUB_REPOSITORY}/actions/variables/PHP_COMMIT_SHA \
+            -f name='PHP_COMMIT_SHA' \
+            -f value="${SHA}"
         env:
-          LATEST_PHP_SHA: ${{ needs.get-latest-commit.outputs.latest-php-sha }}
-    
-      - name: Update FORCE_BUILD
-        if: startsWith(github.event.head_commit.message, 'FORCE_BUILD=TRUE')
-        run: |
-          echo "FORCE_BUILD: ${LATEST_PHP_SHA}" > ./ci/build_sha.txt
-        env:
-          LATEST_PHP_SHA: ${{ needs.get-latest-commit.outputs.latest-php-sha }}
-  
-      - name: Git Add and Commit
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: './ci/build_sha.txt'
-          author_name: 'daily-check-cron-sohmc-php-mysqli'
-          author_email: '5244e343e13f42aeb23e92f8377c90a7@schedule.github.actions'
+          GH_TOKEN: ${{ secrets.TOKEN_FOR_ACTIONS }}
+          SHA: ${{ needs.get-latest-commit.outputs.latest-php-sha }}
