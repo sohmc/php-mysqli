@@ -20,7 +20,7 @@ jobs:
         run: |
           echo Getting Variants for version ${{ inputs.version }}
           curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/latest/download/php
-          VARIANTS=$(jq -cr --ARG VERSION ${{ inputs.version }} '[.tags[].Directory | select(startswith($VERSION))]' php.json)
+          VARIANTS=$(jq -cr --arg VERSION ${{ inputs.version }} '[.tags[].Directory | select(startswith($VERSION))]' php.json)
           echo Variants: ${VARIANTS}
           echo "variants=$VARIANTS" >> $GITHUB_OUTPUT
       
