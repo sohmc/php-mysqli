@@ -1,0 +1,55 @@
+name: Check docker/php commit sha
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+      - 'LICENSE'
+  schedule:
+    - cron: '15 0 * * *'
+    - cron: '20 0 * * *'
+    - cron: '25 0 * * *'
+
+env:
+  VERSION: ${{ ( github.event.schedule == '15 0 * * *' && '8.2' ) || ( github.event.schedule == '20 0 * * *' && '8.1' ) || ( github.event.schedule == '25 0 * * *' && '8.0' ) ||  'null' }}
+
+jobs:
+  get-latest-commit:
+    runs-on: ubuntu-latest
+    outputs:
+      new-commit: ${{ steps.compare-sha.outputs.NEWCOMMIT }}
+      latest-php-sha: ${{ steps.get-latest-sha.outputs.GitCommit }}
+    steps:       
+      - name: Inspect event
+        run: |
+          echo "VERSION: $VERSION"
+          echo "Event Name: ${GITHUB_EVENT_NAME}"
+          cat ${GITHUB_EVENT_PATH}
+
+      - name: Get variants
+        id: get-variants
+        run: |
+          echo Getting Variants for version ${{ env.version }}
+          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/latest/download/php
+          VARIANTS=$(jq -cr --arg VERSION ${{ env.version }} '[.tags[].Directory | select(startswith($VERSION))]' php.json)
+          echo Variants: ${VARIANTS}
+          echo "variants=$VARIANTS" >> $GITHUB_OUTPUT
+
+      - name: Compare SHAs
+        id: compare-sha
+        run: |
+          echo Archived SHA: ${ARCHIVEDSHA}
+          echo Latest SHA:   ${LATESTSHA}
+          if [[ $ARCHIVEDSHA == $LATESTSHA ]]; then 
+            NEWCOMMIT=false
+          else
+            NEWCOMMIT=true
+          fi
+
+          echo "NEWCOMMIT=$NEWCOMMIT" >> $GITHUB_OUTPUT
+          echo "NEWCOMMIT=$NEWCOMMIT"
+        env:
+          ARCHIVEDSHA: ${{ vars.PHP_COMMIT_SHA }}
+          LATESTSHA: ${{ steps.get-latest-sha.outputs.GitCommit }}
+
