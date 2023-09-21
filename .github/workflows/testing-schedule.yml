@@ -7,12 +7,12 @@ on:
       - 'README.md'
       - 'LICENSE'
   schedule:
-    - cron: '55 * * * *'
-    - cron: '00 * * * *'
-    - cron: '05 * * * *'
+    - cron: '10 * * * *'
+    - cron: '15 * * * *'
+    - cron: '20 * * * *'
 
 env:
-  VERSION: ${{ ( github.event.schedule == '55 * * * *' && '8.2' ) || ( github.event.schedule == '00 * * * *' && '8.1' ) || ( github.event.schedule == '05 * * * *' && '8.0' ) ||  'null' }}
+  VERSION: ${{ ( github.event.schedule == '10 * * * *' && '8.2' ) || ( github.event.schedule == '15 * * * *' && '8.1' ) || ( github.event.schedule == '20 * * * *' && '8.0' ) ||  'null' }}
 
 jobs:
   get-latest-commit:
