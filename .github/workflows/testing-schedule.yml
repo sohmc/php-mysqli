@@ -12,7 +12,7 @@ on:
     - cron: '20 * * * *'
 
 env:
-  VERSION: ${{ ( github.event.schedule == '10 * * * *' && '8.2' ) || ( github.event.schedule == '15 * * * *' && '8.1' ) || ( github.event.schedule == '20 * * * *' && '8.0' ) ||  'null' }}
+  VERSION: ${{ ( github.event.schedule == '10 * * * *' && '8.2' ) || ( github.event.schedule == '15 * * * *' && '8.1' ) || ( github.event.schedule == '20 * * * *' && '8.0' ) ||  '8.2' }}
 
 jobs:
   get-latest-commit:
