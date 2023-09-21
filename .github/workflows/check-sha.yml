@@ -20,7 +20,14 @@ jobs:
     outputs:
       new-commit: ${{ steps.compare-sha.outputs.NEWCOMMIT }}
       latest-php-sha: ${{ steps.get-latest-sha.outputs.GitCommit }}
-    steps:       
+    steps:
+      - name: Inspect event
+        run: |
+          date
+          echo "VERSION: ${{ env.VERSION }}"
+          echo "Event Name: ${GITHUB_EVENT_NAME}"
+          cat ${GITHUB_EVENT_PATH}
+
       - name: Get latest commit SHA
         id: get-latest-sha
         run: |
@@ -52,7 +59,7 @@ jobs:
     uses: ./.github/workflows/multi-platform-build.yml
     secrets: inherit
     with:
-      version: $VERSION
+      version: ${{ env.VERSION }}
 
   store-php-sha:
     if: github.event.schedule == '47 9 * * *'
