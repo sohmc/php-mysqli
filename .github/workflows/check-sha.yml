@@ -12,7 +12,7 @@ on:
     - cron: '47 9 * * *'
 
 env:
-  VERSION: ${{ ( github.event.schedule == '47 5 * * *' && '8.2' ) || ( github.event.schedule == '47 7 * * *' && '8.1' ) || ( github.event.schedule == '47 9 * * *' && '8.0' ) ||  'null' }}
+  VERSION: ${{ ( github.event.schedule == '47 5 * * *' && '8.2' ) || ( github.event.schedule == '47 7 * * *' && '8.1' ) || ( github.event.schedule == '47 9 * * *' && '8.0' ) ||  'not-scheduled' }}
 
 jobs:
   get-latest-commit:
@@ -20,13 +20,17 @@ jobs:
     outputs:
       new-commit: ${{ steps.compare-sha.outputs.NEWCOMMIT }}
       latest-php-sha: ${{ steps.get-latest-sha.outputs.GitCommit }}
+      version: ${{ env.VERSION }}
     steps:
       - name: Inspect event
         run: |
           date
-          echo "VERSION: ${{ env.VERSION }}"
+          echo "VERSION: $VERSION"
+          echo "github.event.schedule: ${SCHEDULE}"
           echo "Event Name: ${GITHUB_EVENT_NAME}"
           cat ${GITHUB_EVENT_PATH}
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
 
       - name: Get latest commit SHA
         id: get-latest-sha
@@ -59,7 +63,7 @@ jobs:
     uses: ./.github/workflows/multi-platform-build.yml
     secrets: inherit
     with:
-      version: ${{ env.VERSION }}
+      version: ${{ needs.get-latest-commit.outputs.version }}
 
   store-php-sha:
     if: github.event.schedule == '47 9 * * *'
