@@ -7,13 +7,12 @@ on:
       - 'README.md'
       - 'LICENSE'
   schedule:
-    - cron: '15 0 * * *'
-    - cron: '20 0 * * *'
-    - cron: '25 0 * * *'
+    - cron: '55 * * * *'
+    - cron: '00 * * * *'
+    - cron: '05 * * * *'
 
 env:
-  VERSION: ${{ ( github.event.schedule == '15 0 * * *' && '8.2' ) || ( github.event.schedule == '20 0 * * *' && '8.1' ) || ( github.event.schedule == '25 0 * * *' && '8.0' ) ||  'null' }}
-  VVV: "FOOBAR"
+  VERSION: ${{ ( github.event.schedule == '55 * * * *' && '8.2' ) || ( github.event.schedule == '00 * * * *' && '8.1' ) || ( github.event.schedule == '05 * * * *' && '8.0' ) ||  'null' }}
 
 jobs:
   get-latest-commit:
@@ -23,16 +22,20 @@ jobs:
         run: |
           date
           echo "VERSION: $VERSION"
-          echo "VVV: $VVV"
+          echo "github.event.schedule: ${SCHEDULE}"
           echo "Event Name: ${GITHUB_EVENT_NAME}"
           cat ${GITHUB_EVENT_PATH}
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
 
       - name: Get variants
         id: get-variants
         run: |
-          echo Getting Variants for version ${{ env.version }}
+          echo Getting Variants for version ${VERSION}
           curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/latest/download/php
-          VARIANTS=$(jq -cr --arg VERSION ${{ env.version }} '[.tags[].Directory | select(startswith($VERSION))]' php.json)
+          VARIANTS=$(jq -cr --arg VERSION ${VERSION} '[.tags[].Directory | select(startswith($VERSION))]' php.json)
           echo Variants: ${VARIANTS}
           echo "variants=$VARIANTS" >> $GITHUB_OUTPUT
+        env:
+          VERSION: ${{ env.VERSION }}
 
