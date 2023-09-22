@@ -1,6 +1,6 @@
 # php with mysqli
 
-[![Multi-Platform Docker Image Build CI](https://github.com/sohmc/php-mysqli/actions/workflows/multi-platform-build.yml/badge.svg)](https://github.com/sohmc/php-mysqli/actions/workflows/multi-platform-build.yml)
+[![Check docker/php commit sha](https://github.com/sohmc/php-mysqli/actions/workflows/check-sha.yml/badge.svg)](https://github.com/sohmc/php-mysqli/actions/workflows/check-sha.yml)
 [![Docker Pulls](https://img.shields.io/docker/pulls/sohmc/php-mysqli)](https://hub.docker.com/r/sohmc/php-mysqli)
 
 This Dockerfile is based on [Docker Hub's official php image](https://hub.docker.com/_/php).  The goal of this project is
