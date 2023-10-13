@@ -12,7 +12,7 @@ on:
     - cron: '47 9 * * *'
 
 env:
-  VERSION: ${{ ( github.event.schedule == '47 5 * * *' && '8.2' ) || ( github.event.schedule == '47 7 * * *' && '8.1' ) || ( github.event.schedule == '47 9 * * *' && '8.0' ) ||  'not-scheduled' }}
+  VERSION: ${{ ( github.event.schedule == '47 5 * * *' && '8.2/' ) || ( github.event.schedule == '47 7 * * *' && '8.1/' ) || ( github.event.schedule == '47 9 * * *' && '8.0/' ) ||  'not-scheduled' }}
 
 jobs:
   get-latest-commit:
