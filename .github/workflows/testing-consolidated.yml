@@ -9,77 +9,8 @@ env:
 
 jobs:
   get-architectures:
-    runs-on: ubuntu-latest
-    outputs:
-      architectures: ${{ steps.get-architectures.outputs.architectures }}
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Get Architectures for ${{ env.VERSION }}
-        id: get-architectures
-        run: |
-          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/latest/download/php
-
-          ARCHITECTURES=$(jq -cr --arg VARIANT "8.2/bullseye/apache" '.tags[] | select(.Directory == $VARIANT).Architectures | join(",")' php.json)
-          echo "Architectures: ${ARCHITECTURES}"
-          
-          PLATFORMS=""
-          for i in ${ARCHITECTURES//,/ }
-          do
-            THIS_PLATFORM=$(jq -cr --arg ARCHITECTURE ${i} '.[$ARCHITECTURE]' ./ci/qemu-platform-map.json)
-            if [ "${THIS_PLATFORM}" != "UNSUPPORTED" ]; then
-              if [ -z "$PLATFORMS" ]; then
-                PLATFORMS=$THIS_PLATFORM
-              else
-                PLATFORMS=${PLATFORMS},${THIS_PLATFORM}
-              fi
-            fi
-          done
-          
-          echo "Platforms: ${PLATFORMS}"
-          echo "platforms_csv=${PLATFORMS}" >> $GITHUB_OUTPUT
-      
-      - name: Build Dockerfile
-        id: build_dockerfile
-        run: |
-          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/latest/download/php
-          echo VARIANT: ${{ env.VERSION }}
-          TAG=$(jq -cr --arg VARIANT ${{ env.VERSION }} '.tags[] | select(.Directory == $VARIANT).Tags[0]' php.json)
-          ALL_TAGS_CSV=$(jq -cr --arg VARIANT ${{ env.VERSION }} '.tags[] | select(.Directory == $VARIANT).Tags | map("sohmc/php-mysqli:" + .) | join(",")' php.json)
-          echo "Tag: ${TAG}"
-          echo "tag=${TAG}" >> $GITHUB_OUTPUT
-          echo "ALL_TAGS_CSV: ${ALL_TAGS_CSV}"
-          echo "all_tags_csv=${ALL_TAGS_CSV}" >> $GITHUB_OUTPUT
-          echo "++++ Building ${TAG} ++++"
-          sed "s/{{TAG}}/$TAG/" ./ci/Dockerfile_Template > ./ci/Dockerfile
-          cat ./ci/Dockerfile
-      
-      - name: Login to Dockerhub
-        uses: docker/login-action@v2
-        with:
-          username: sohmc
-          password: ${{ secrets.DOCKER_TOKEN }}  
-      
-      - name: Set up QEMU
-        id: qemu
-        uses: docker/setup-qemu-action@v3
-
-      - name: Show available architectures via QEMU
-        run: echo ${AVAILABLE}
-        env:
-          AVAILABLE: ${{ steps.qemu.outputs.platforms }}
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-        with:
-          buildkitd-flags: --debug
-
-      - name: Build the Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          platforms: ${{ steps.get-architectures.outputs.platforms_csv }}
-          push: true
-          tags: ${{ steps.build_dockerfile.outputs.all_tags_csv }}
-          # does not work linux/arm/v5 AND linux/mips64le - composer does not support  mips64le or armv5 nor does the php image support them on the alpine variant
-  
+    uses: ./.github/workflows/build-image.yml 
+    secrets: inherit
+    with:
+      variant: '8.2/bullseye/apache'
+    
