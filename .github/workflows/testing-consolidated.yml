@@ -13,6 +13,8 @@ jobs:
     outputs:
       architectures: ${{ steps.get-architectures.outputs.architectures }}
     steps:
+      - uses: actions/checkout@v4
+      
       - name: Get Architectures for ${{ env.VERSION }}
         id: get-architectures
         run: |

@@ -77,6 +77,7 @@ jobs:
           echo "all_tags_csv=${ALL_TAGS_CSV}" >> $GITHUB_OUTPUT
           echo "++++ Building ${TAG} ++++"
           sed "s/{{TAG}}/$TAG/" ./ci/Dockerfile_Template > ./ci/Dockerfile
+          cat ./ci/Dockerfile
         env:
           VARIANT: ${{ inputs.variant }}
 
