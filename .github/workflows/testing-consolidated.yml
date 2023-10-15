@@ -27,10 +27,12 @@ jobs:
           for i in ${ARCHITECTURES//,/ }
           do
             THIS_PLATFORM=$(jq -cr --arg ARCHITECTURE ${i} '.[$ARCHITECTURE]' ./ci/qemu-platform-map.json)
-            if [ -z "$PLATFORM" ]; then
-              PLATFORMS=$THIS_PLATFORM
-            else
-              PLATFORMS=${PLATFORMS},${THIS_PLATFORM}
+            if ["${THIS_PLATFORM}" != "UNSUPPORTED" ]; then
+              if [ -z "$PLATFORMS" ]; then
+                PLATFORMS=$THIS_PLATFORM
+              else
+                PLATFORMS=${PLATFORMS},${THIS_PLATFORM}
+              fi
             fi
           done
           
