@@ -1,0 +1,16 @@
+name: Testing Consolidated Build
+on:
+  push:
+    branches:
+      - consolidated-build
+
+env:
+  VERSION: '8.2/bullseye/apache'
+
+jobs:
+  get-architectures:
+    uses: ./.github/workflows/build-image.yml 
+    secrets: inherit
+    with:
+      variant: '8.2/bullseye/apache'
+    

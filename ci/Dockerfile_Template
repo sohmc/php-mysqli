@@ -1,3 +1,4 @@
 FROM php:{{TAG}}
 RUN docker-php-ext-install mysqli
 
+COPY ../php/index.php /var/html/www/index.php

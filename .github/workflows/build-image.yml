@@ -9,61 +9,46 @@ on:
     outputs:
       architectures: 
         description: architectures that the variant supports
-        value: ${{ jobs.get-architectures.outputs.architectures }}
+        value: ${{ jobs.build-images.outputs.architectures }}
       tags:
         description: All tags registered with the variant
-        value: ${{ jobs.merge-images.outputs.all_tags }}
+        value: ${{ jobs.build-images.outputs.all_tags }}
 
 jobs:
-  get-architectures:
+  build-images:
     runs-on: ubuntu-latest
     outputs:
-      architectures: ${{ steps.get-architectures.outputs.architectures }}
+      architectures: ${{ steps.get-architectures.outputs.platforms_csv }}
+      all_tags: ${{ steps.build_dockerfile.outputs.tag }}
+
+    name: ${{ inputs.variant }} --- Build Image
     steps:
+      - uses: actions/checkout@v4
+
       - name: Get Architectures for ${{ inputs.variant }}
         id: get-architectures
         run: |
           curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/latest/download/php
-          echo VARIANT: ${{ inputs.variant }}
-          ARCHITECTURES=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.tags[] | select(.Directory == $VARIANT).Architectures' php.json)
+
+          ARCHITECTURES=$(jq -cr --arg VARIANT ${{ inputs.variant }} '.tags[] | select(.Directory == $VARIANT).Architectures | join(",")' php.json)
           echo "Architectures: ${ARCHITECTURES}"
-          echo "architectures=$ARCHITECTURES" >> $GITHUB_OUTPUT
-
-  build-images:
-    runs-on: ubuntu-latest
-    needs: get-architectures
-    outputs:
-      tag: ${{ steps.build_dockerfile.outputs.tag }}
-    strategy:
-      # Fail Fast for architecture builds.  If there is an issue building a specific architecture, 
-      # the entire variant build will fail so that it can be retried later.
-      fail-fast: true
-      matrix:
-        architectures: ${{ fromJson(needs.get-architectures.outputs.architectures) }}
-        exclude:
-          # Architectures that are not supported by QEMU
-          - architectures: arm32v5
-
-    name: ${{ inputs.variant }} - ${{ matrix.architectures }} --- Build Image
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Platform mapping
-        id: platform-mapping
-        run: |
-          PLATFORM=$(jq -cr --arg ARCHITECTURE ${ARCHITECTURE} '.[$ARCHITECTURE]' ./ci/qemu-platform-map.json)
-          echo "Platform: ${PLATFORM}"
-          echo "platform=${PLATFORM}" >> $GITHUB_OUTPUT
-        env:
-          ARCHITECTURE: ${{ matrix.architectures }}
-
-      - run: |
-          echo "variant: ${VARIANT} - arch: ${ARCH} (${PLATFORM})"
-        env:
-          VARIANT: ${{ inputs.variant }}
-          ARCH: ${{ matrix.architectures }}
-          PLATFORM: ${{ steps.platform-mapping.outputs.platform }}
-    
+          
+          PLATFORMS=""
+          for i in ${ARCHITECTURES//,/ }
+          do
+            THIS_PLATFORM=$(jq -cr --arg ARCHITECTURE ${i} '.[$ARCHITECTURE]' ./ci/qemu-platform-map.json)
+            if [ "${THIS_PLATFORM}" != "UNSUPPORTED" ]; then
+              if [ -z "$PLATFORMS" ]; then
+                PLATFORMS=$THIS_PLATFORM
+              else
+                PLATFORMS=${PLATFORMS},${THIS_PLATFORM}
+              fi
+            fi
+          done
+          
+          echo "Platforms: ${PLATFORMS}"
+          echo "platforms_csv=${PLATFORMS}" >> $GITHUB_OUTPUT
+      
       - name: Build Dockerfile
         id: build_dockerfile
         run: |
@@ -77,131 +62,34 @@ jobs:
           echo "all_tags_csv=${ALL_TAGS_CSV}" >> $GITHUB_OUTPUT
           echo "++++ Building ${TAG} ++++"
           sed "s/{{TAG}}/$TAG/" ./ci/Dockerfile_Template > ./ci/Dockerfile
-        env:
-          VARIANT: ${{ inputs.variant }}
-
-      # Multi-platform building: https://docs.docker.com/build/ci/github-actions/multi-platform/
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ github.repository }}
-          tags: ${{ steps.build_dockerfile.outputs.tag }}
-
-      - name: Set up QEMU
-        if: ${{ matrix.architectures }} != 'amd64'
-        id: qemu
-        uses: docker/setup-qemu-action@v2
+          cat ./ci/Dockerfile
       
+      - name: Login to Dockerhub
+        uses: docker/login-action@v2
+        with:
+          username: sohmc
+          password: ${{ secrets.DOCKER_TOKEN }}  
+      
+      - name: Set up QEMU
+        id: qemu
+        uses: docker/setup-qemu-action@v3
+
       - name: Show available architectures via QEMU
-        if: ${{ matrix.architectures }} != 'amd64'
         run: echo ${AVAILABLE}
         env:
           AVAILABLE: ${{ steps.qemu.outputs.platforms }}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Login to Dockerhub
-        uses: docker/login-action@v2
+        uses: docker/setup-buildx-action@v3
         with:
-          username: sohmc
-          password: ${{ secrets.DOCKER_TOKEN }}
+          buildkitd-flags: --debug
 
       - name: Build the Docker image
-        id: docker_image_build
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: .
-          platforms: ${{ steps.platform-mapping.outputs.platform }}
-          file: ./ci/Dockerfile
-          labels: ${{ steps.meta.outputs.labels }}
-          outputs: type=image,name=${{ github.repository }},push-by-digest=true,name-canonical=true,push=true
+          platforms: ${{ steps.get-architectures.outputs.platforms_csv }}
+          push: true
+          tags: ${{ steps.build_dockerfile.outputs.all_tags_csv }}
   
-      - name: Export Digest
-        run: |
-          mkdir -p /tmp/digests
-          digest="${{ steps.docker_image_build.outputs.digest }}"
-          touch "/tmp/digests/${digest#sha256:}"
-      
-      - name: Upload digest
-        uses: actions/upload-artifact@v3
-        with:
-          name: digests
-          path: /tmp/digests/*
-          if-no-files-found: error
-          retention-days: 1
-
-  merge-images:
-    runs-on: ubuntu-latest
-    needs: build-images
-    outputs:
-      all_tags: ${{ steps.get_all_tags.outputs.all_tags }}
-    steps:
-      - name: Download digests
-        uses: actions/download-artifact@v3
-        with:
-          name: digests
-          path: /tmp/digests
-      
-      - name: Get all tags for variant
-        id: get_all_tags
-        run: |
-          curl -kL -o php.json https://github.com/sohmc/docker-image-library-jsonizer/releases/latest/download/php
-          echo VARIANT: ${VARIANT}
-          ALL_TAGS=$(jq -cr --arg VARIANT ${VARIANT} '.tags[] | select(.Directory == $VARIANT).Tags | map("-t sohmc/php-mysqli:" + .) | join(" ")' php.json)
-          echo "All Tags: ${ALL_TAGS}"
-          echo "all_tags=$ALL_TAGS" >> $GITHUB_OUTPUT
-        env:
-          VARIANT: ${{ inputs.variant }}          
-        
-      - name: Inspect Docker Image Tags
-        working-directory: /tmp/digests
-        run: |
-          echo "All Tags: ${ALL_TAGS}"
-          ls -l
-          echo $(printf '${{ github.repository }}@sha256:%s ' *)
-        env:
-          ALL_TAGS: ${{ steps.get_all_tags.outputs.all_tags }}
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ github.repository }}
-          tags: |
-            type=raw,priority=9999,value=${{ needs.build-images.outputs.tag }}
-      
-      - name: Inspect Docker Meta Output
-        run: |
-          echo DOCKER_METADATA_OUTPUT_JSON: ${DOCKER_METADATA_OUTPUT_JSON}
-          echo Inspecting ${DOCKER_METADATA_OUTPUT_BAKE_FILE}
-          cat $DOCKER_METADATA_OUTPUT_BAKE_FILE
-          
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: sohmc
-          password: ${{ secrets.DOCKER_TOKEN }}
-            
-      - name: Create manifest list and push
-        working-directory: /tmp/digests
-        run: |
-          docker buildx imagetools create ${ALL_TAGS} \
-            $(printf '${{ github.repository }}@sha256:%s ' *)
-        env:
-          ALL_TAGS: ${{ steps.get_all_tags.outputs.all_tags }}
-      
-      - name: Inspect image
-        run: |
-          docker buildx imagetools inspect ${{ github.repository }}
-
-
-
-
-
-
 
