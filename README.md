@@ -1,6 +1,8 @@
 # php with mysqli
 
-[![Check docker/php commit sha](https://github.com/sohmc/php-mysqli/actions/workflows/check-sha.yml/badge.svg)](https://github.com/sohmc/php-mysqli/actions/workflows/check-sha.yml)
+[![Build and Deploy - PHP 8.0 Variants](https://github.com/sohmc/php-mysqli/actions/workflows/build-8-0-image.yml/badge.svg)](https://github.com/sohmc/php-mysqli/actions/workflows/build-8-0-image.yml)
+[![Build and Deploy - PHP 8.1 Variants](https://github.com/sohmc/php-mysqli/actions/workflows/build-8-1-image.yml/badge.svg)](https://github.com/sohmc/php-mysqli/actions/workflows/build-8-1-image.yml)
+[![Build and Deploy - PHP 8.2 Variants](https://github.com/sohmc/php-mysqli/actions/workflows/build-8-2-image.yml/badge.svg)](https://github.com/sohmc/php-mysqli/actions/workflows/build-8-2-image.yml)
 [![Docker Pulls](https://img.shields.io/docker/pulls/sohmc/php-mysqli)](https://hub.docker.com/r/sohmc/php-mysqli)
 
 This Dockerfile is based on [Docker Hub's official php image](https://hub.docker.com/_/php).  The goal of this project is
