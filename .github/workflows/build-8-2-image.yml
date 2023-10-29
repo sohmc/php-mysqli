@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - debugging-docker-build
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
@@ -56,7 +57,7 @@ jobs:
           LATESTSHA: ${{ steps.get-latest-sha.outputs.GitCommit }}
 
   trigger-build:
-    if: ( needs.get-latest-commit.outputs.new-commit == 'true' && github.event_name == 'schedule' ) || startsWith(github.event.head_commit.message, 'FORCE_BUILD=TRUE')
+    # if: ( needs.get-latest-commit.outputs.new-commit == 'true' && github.event_name == 'schedule' ) || startsWith(github.event.head_commit.message, 'FORCE_BUILD=TRUE')
     needs: get-latest-commit
     uses: ./.github/workflows/multi-platform-build.yml
     secrets: inherit
