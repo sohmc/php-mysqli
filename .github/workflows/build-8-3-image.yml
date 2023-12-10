@@ -1,4 +1,4 @@
-name: Build and Deploy - PHP 8.0 Variants
+name: Build and Deploy - PHP 8.3 Variants
 on:
   push:
     branches:
@@ -10,7 +10,7 @@ on:
     - cron: '47 9 * * *'
 
 env:
-  VERSION: '8.0/'
+  VERSION: '8.3/'
 
 jobs:
   get-latest-commit:
@@ -52,7 +52,7 @@ jobs:
           echo "NEWCOMMIT=$NEWCOMMIT" >> $GITHUB_OUTPUT
           echo "NEWCOMMIT=$NEWCOMMIT"
         env:
-          ARCHIVEDSHA: ${{ vars.PHP_80_COMMIT_SHA }}
+          ARCHIVEDSHA: ${{ vars.PHP_83_COMMIT_SHA }}
           LATESTSHA: ${{ steps.get-latest-sha.outputs.GitCommit }}
 
   trigger-build:
@@ -74,8 +74,8 @@ jobs:
           gh api --method PATCH \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/${GITHUB_REPOSITORY}/actions/variables/PHP_80_COMMIT_SHA \
-            -f name='PHP_80_COMMIT_SHA' \
+            /repos/${GITHUB_REPOSITORY}/actions/variables/PHP_83_COMMIT_SHA \
+            -f name='PHP_83_COMMIT_SHA' \
             -f value="${SHA}"
         env:
           GH_TOKEN: ${{ secrets.TOKEN_FOR_ACTIONS }}
