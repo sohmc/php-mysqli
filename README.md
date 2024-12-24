@@ -12,6 +12,8 @@ If you're like me, you likely have php code that you really don't want to port o
 
 Since mysqli is still supported, this docker image installs the driver but leaves everything else the same.  For all intents and purposes, you may continue to use the official documentation to deploy this container.
 
+**As of 12/24/2024**, this repo will check for new releases once a week instead of once a day.  Dockerhub has started to rate-limit me from pulling their images.
+
 ## Tagging conventions
 
 This repository will attempt, using Github Actions on a daily schedule, to keep in line with official releases of the official repository.  As such, containers will append `-mysqli` to the end of the repo name, like so:
@@ -47,3 +49,9 @@ Using Docker's [qemu action](https://github.com/docker/setup-qemu-action), this 
 The PHP image created by Docker is released via the MIT license.  Likewise, the php-mysqli image created by this repository is also released via the MIT license.
 
 All code written within and maintained within `.github/workflows/` and `ci/` directories are released via AGPL 3.0.
+
+
+# Future of this repository
+
+On January 1, 2026 (yes, that's twenty-twenty six), this repo will be set to be archived.  I have migrated my work to nodejs and do not need this image anymore.  If you wish to continue these builds, please feel free to let me know and I'd be happy to migrate the repo to you.
+
