@@ -5,14 +5,15 @@
 [![Build and Deploy - PHP 8.3 Variants](https://github.com/sohmc/php-mysqli/actions/workflows/build-8-3-image.yml/badge.svg)](https://github.com/sohmc/php-mysqli/actions/workflows/build-8-3-image.yml)
 [![Docker Pulls](https://img.shields.io/docker/pulls/sohmc/php-mysqli)](https://hub.docker.com/r/sohmc/php-mysqli)
 
+> [!IMPORTANT]
+> **As of 2/13/2024**, this repo will no longer maintain mysqli images for php due to aggressive [rate limiting from Dockerhub](https://docs.docker.com/docker-hub/usage/).  If you require this image, please feel free to review the [`Dokcerfile_Template`](ci/Dockerfile_Template) and pull the image best suited for your needs.
+
 This Dockerfile is based on [Docker Hub's official php image](https://hub.docker.com/_/php).  The goal of this project is
 simple: [Install the mysqli driver](https://www.php.net/manual/en/book.mysqli.php).
 
 If you're like me, you likely have php code that you really don't want to port over to [PDO_MySQL](https://www.php.net/manual/en/ref.pdo-mysql.php).
 
 Since mysqli is still supported, this docker image installs the driver but leaves everything else the same.  For all intents and purposes, you may continue to use the official documentation to deploy this container.
-
-**As of 2/13/2024**, this repo will no longer maintain mysqli images for php due to aggressive [rate limiting from Dockerhub](https://docs.docker.com/docker-hub/usage/).  If you require this image, please feel free to review the [`Dokcerfile_Template`](ci/Dockerfile_Template) and pull the image best suited for your needs.
 
 ## Tagging conventions
 
