@@ -12,7 +12,7 @@ If you're like me, you likely have php code that you really don't want to port o
 
 Since mysqli is still supported, this docker image installs the driver but leaves everything else the same.  For all intents and purposes, you may continue to use the official documentation to deploy this container.
 
-**As of 12/24/2024**, this repo will check for new releases once a week instead of once a day.  Dockerhub has started to rate-limit me from pulling their images.
+**As of 2/13/2024**, this repo will no longer maintain mysqli images for php due to aggressive [rate limiting from Dockerhub](https://docs.docker.com/docker-hub/usage/).  If you require this image, please feel free to review the [`Dokcerfile_Template`](ci/Dockerfile_Template) and pull the image best suited for your needs.
 
 ## Tagging conventions
 

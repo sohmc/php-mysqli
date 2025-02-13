@@ -6,8 +6,8 @@ on:
     paths-ignore:
       - 'README.md'
       - 'LICENSE'
-  schedule:
-    - cron: '47 7 * * *'
+  # schedule:
+  #   - cron: '47 7 * * *'
 
 env:
   VERSION: '8.1/'

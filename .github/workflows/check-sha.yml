@@ -12,7 +12,8 @@ on:
     - cron: '47 9 5 * *'
 
 env:
-  VERSION: ${{ ( github.event.schedule == '47 5 1 * *' && '8.2/' ) || ( github.event.schedule == '47 7 3 * *' && '8.1/' ) || ( github.event.schedule == '47 9 5 * *' && '8.0/' ) ||  'not-scheduled' }}
+  # VERSION: ${{ ( github.event.schedule == '47 5 1 * *' && '8.2/' ) || ( github.event.schedule == '47 7 3 * *' && '8.1/' ) || ( github.event.schedule == '47 9 5 * *' && '8.0/' ) ||  'not-scheduled' }}
+  VERSION: DISABLED
 
 jobs:
   get-latest-commit:
