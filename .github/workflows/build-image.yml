@@ -23,7 +23,7 @@ jobs:
 
     name: ${{ inputs.variant }} --- Build Image
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Get Architectures for ${{ inputs.variant }}
         id: get-architectures
